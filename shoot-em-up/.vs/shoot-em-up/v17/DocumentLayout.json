@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\classes\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|solutionrelative:shoot-em-up\\classes\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|solutionrelative:shoot-em-up\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\shoot-em-up.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|solutionrelative:shoot-em-up\\shoot-em-up.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|solutionrelative:shoot-em-up\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\game.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|solutionrelative:shoot-em-up\\game.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|solutionrelative:shoot-em-up\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8795F3C-F554-4DD6-BF72-367A6261E3BE}|shoot-em-up\\shoot-em-up.csproj|c:\\users\\pa22yog\\documents\\github\\shoot-em-up-game\\shoot-em-up\\shoot-em-up\\game.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
@@ -31,19 +39,58 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Classes\\Player.cs",
+              "RelativeDocumentMoniker": "shoot-em-up\\Classes\\Player.cs",
+              "ToolTip": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Classes\\Player.cs",
+              "RelativeToolTip": "shoot-em-up\\Classes\\Player.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-11T12:44:26.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "shoot-em-up",
+              "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\shoot-em-up.csproj",
+              "RelativeDocumentMoniker": "shoot-em-up\\shoot-em-up.csproj",
+              "ToolTip": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\shoot-em-up.csproj",
+              "RelativeToolTip": "shoot-em-up\\shoot-em-up.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-09-11T12:43:32.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Program.cs",
+              "RelativeDocumentMoniker": "shoot-em-up\\Program.cs",
+              "ToolTip": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Program.cs",
+              "RelativeToolTip": "shoot-em-up\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-11T12:38:49.452Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Game.cs",
               "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Game.cs",
               "RelativeDocumentMoniker": "shoot-em-up\\Game.cs",
               "ToolTip": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Game.cs",
               "RelativeToolTip": "shoot-em-up\\Game.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-11T12:23:38.225Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Game.cs [Conception]",
               "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Game.cs",
               "RelativeDocumentMoniker": "shoot-em-up\\Game.cs",
@@ -55,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Game.resx",
               "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Game.resx",
               "RelativeDocumentMoniker": "shoot-em-up\\Game.resx",
@@ -63,19 +110,6 @@
               "RelativeToolTip": "shoot-em-up\\Game.resx",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
               "WhenOpened": "2026-09-11T12:21:04.503Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Game.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Game.Designer.cs",
-              "RelativeDocumentMoniker": "shoot-em-up\\Game.Designer.cs",
-              "ToolTip": "C:\\Users\\pa22yog\\Documents\\Github\\Shoot-em-UP-game\\shoot-em-up\\shoot-em-up\\Game.Designer.cs",
-              "RelativeToolTip": "shoot-em-up\\Game.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-11T12:19:54.606Z",
               "EditorCaption": ""
             }
           ]
