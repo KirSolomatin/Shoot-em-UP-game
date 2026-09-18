@@ -1,6 +1,8 @@
-﻿using System;
+﻿using shoot_em_up.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,25 +10,15 @@ namespace shoot_em_up.Classes
 {
     internal class Player
     {
-        public int posX { get; private set; }
-        public int posY { get; private set; }
+        public int posX { get; private set; } //horizontal player position
+        public int posY { get; private set; } //vertical player position
 
-        public Image playerTexture { get; private set; }
+        Image playerModel = Image.FromFile(@"Resources\King.png"); //player model
 
         public Player()
         {
-            posX = 100;
-            posY = 100;
-
-            string path = Path.Combine(
-                AppContext.BaseDirectory,
-                "Resources",
-                "King.png"
-            );
-
-            MessageBox.Show(path);
-
-            playerTexture = Image.FromFile(path);
+            posX = 0; //Sets horizontal the player's position to 100
+            posY = 0; //Sets vertical the player's position to 100
         }
 
         public void RightMove()
@@ -37,6 +29,11 @@ namespace shoot_em_up.Classes
         public void LeftMove()
         {
             posX -= 100;
+        }
+
+        public void Render(BufferedGraphics drawingSpace)
+        {
+            drawingSpace.Graphics.DrawImage(playerModel, posX, posY, 200, 200);
         }
     }
 }

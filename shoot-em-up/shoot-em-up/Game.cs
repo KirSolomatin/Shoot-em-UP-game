@@ -6,11 +6,19 @@ namespace shoot_em_up
     {
         private Player player = new Player();
 
+        BufferedGraphicsContext currentContext;
+        BufferedGraphics game;
+
         public Game()
         {
             InitializeComponent();
-            this.KeyPreview = true;                             //Permet de détecter les frappes au clavier même lorsque le focus se trouve sur un autre élément
+            this.KeyPreview = true;                             //Allows keyboard input to be detected even when the focus is on another element
 
+            // Gets a reference to the current BufferedGraphicsContext
+            currentContext = BufferedGraphicsManager.Current;
+            // Creates a BufferedGraphics instance associated with this form, and with
+            // dimensions the same size as the drawing surface of the form.
+            game = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             Render();
         }
 
@@ -22,9 +30,14 @@ namespace shoot_em_up
 
         private void Render()
         {
-            using Graphics graphics = CreateGraphics();
+            player.Render(game);
+            game.Render();
+        }
 
-            graphics.DrawImage(player.playerTexture, player.posX, player.posY);
+        //Method called every frame
+        private void NewFrame(object sender, EventArgs e)
+        {
+            this.Render();
         }
     }
 }

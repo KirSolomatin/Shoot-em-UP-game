@@ -30,8 +30,14 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Game));
-            timer1 = new System.Windows.Forms.Timer(components);
+            timer = new System.Windows.Forms.Timer(components);
             SuspendLayout();
+            // 
+            // timer
+            // 
+            timer.Enabled = true;
+            timer.Interval = 16;
+            timer.Tick += NewFrame;
             // 
             // Game
             // 
@@ -46,6 +52,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer;
     }
 }
