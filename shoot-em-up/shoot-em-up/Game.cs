@@ -5,7 +5,7 @@ namespace shoot_em_up
     public partial class Game : Form
     {
         private Player player = new Player();
-        Image backGround = Image.FromFile(@"Resources\background.jpg"); //
+        Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics game;

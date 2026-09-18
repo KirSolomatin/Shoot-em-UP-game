@@ -44,7 +44,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(556, 554);
+            ClientSize = new Size(851, 657);
             Name = "Game";
             Text = "Form1";
             Load += Game_Load;

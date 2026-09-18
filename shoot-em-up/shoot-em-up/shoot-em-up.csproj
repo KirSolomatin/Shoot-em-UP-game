@@ -11,11 +11,15 @@
 
   <ItemGroup>
     <None Remove="Resources\background.jpg" />
+    <None Remove="Resources\background.png" />
     <None Remove="Resources\King.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Resources\background.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\King.png">
