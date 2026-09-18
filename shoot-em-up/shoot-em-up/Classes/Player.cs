@@ -23,12 +23,12 @@ namespace shoot_em_up.Classes
 
         public void RightMove()
         {
-            posX += 100;
+            posX -= 100;
         }
 
         public void LeftMove()
         {
-            posX -= 100;
+            posX += 100;
         }
 
         public void Render(BufferedGraphics drawingSpace)

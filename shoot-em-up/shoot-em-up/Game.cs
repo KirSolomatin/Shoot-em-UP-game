@@ -5,6 +5,7 @@ namespace shoot_em_up
     public partial class Game : Form
     {
         private Player player = new Player();
+        Image backGround = Image.FromFile(@"Resources\background.jpg"); //
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics game;
@@ -25,11 +26,14 @@ namespace shoot_em_up
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.A) player.RightMove();
-            if (e.KeyCode == Keys.A) player.LeftMove();
+            if (e.KeyCode == Keys.D) player.LeftMove();
         }
 
         private void Render()
         {
+            game.Graphics.Clear(Color.White);
+            game.Graphics.DrawImage(backGround, 0, 0);
+
             player.Render(game);
             game.Render();
         }
@@ -38,6 +42,11 @@ namespace shoot_em_up
         private void NewFrame(object sender, EventArgs e)
         {
             this.Render();
+        }
+
+        private void Game_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

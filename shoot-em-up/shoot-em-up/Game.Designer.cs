@@ -47,6 +47,8 @@
             ClientSize = new Size(556, 554);
             Name = "Game";
             Text = "Form1";
+            Load += Game_Load;
+            KeyDown += Game_KeyDown;
             ResumeLayout(false);
         }
 
