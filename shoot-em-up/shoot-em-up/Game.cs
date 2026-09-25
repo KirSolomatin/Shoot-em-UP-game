@@ -4,6 +4,7 @@ namespace shoot_em_up
     public partial class Game : Form
     {
         private Player player = new Player();
+        private List<BulletRock> bulletRockList = new List<BulletRock>();
         Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;
@@ -26,6 +27,7 @@ namespace shoot_em_up
         {
             if (e.KeyCode == Keys.A) player.RightMove();
             if (e.KeyCode == Keys.D) player.LeftMove();
+            if (e.KeyCode == Keys.J) player.BulletSpawn(bulletRockList);
         }
 
         private void Render()
@@ -34,13 +36,29 @@ namespace shoot_em_up
             game.Graphics.DrawImage(backGround, 0, 0, 800, 800);
 
             player.Render(game);
+            foreach (BulletRock bulletRock in bulletRockList)
+            {
+                bulletRock.Render(game);
+            }
             game.Render();
+        }
+
+        // Calculate the new state after 'interval' milliseconds have elapsed
+        private void Update(int interval)
+        {
+            foreach (BulletRock bulletRock in bulletRockList)
+            {
+                bulletRock.Update(interval);
+            }
+
+            player.Update(interval);
         }
 
         //Method called every frame
         private void NewFrame(object sender, EventArgs e)
         {
             this.Render();
+            this.Update(timer.Interval);
         }
 
         private void Game_Load(object sender, EventArgs e)

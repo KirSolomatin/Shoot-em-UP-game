@@ -15,6 +15,8 @@ namespace shoot_em_up
 
         Image playerModel = Image.FromFile(@"Resources\King.png"); //player model
 
+        private int rockCoolDown = 0; // Interwal between rock's shots
+
         public Player()
         {
             posX = Config.PLAYER_START_X_POSITION; //Sets horizontal the player's position from start
@@ -31,6 +33,20 @@ namespace shoot_em_up
         public void LeftMove()
         {
             if(posX < 700) posX += 100;
+        }
+
+        public void BulletSpawn(List<BulletRock> rock)
+        {
+            if (rockCoolDown < 0)
+            {
+                rock.Add(new BulletRock(this));
+                rockCoolDown = Config.ROCK_COOL_DOWN;
+            }
+        }
+
+        public void Update(int interval)
+        {
+            rockCoolDown -= interval;
         }
 
         public void Render(BufferedGraphics drawingSpace)
