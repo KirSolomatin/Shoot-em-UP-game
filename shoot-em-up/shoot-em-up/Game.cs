@@ -1,4 +1,3 @@
-using shoot_em_up.Classes;
 
 namespace shoot_em_up
 {
@@ -32,7 +31,7 @@ namespace shoot_em_up
         private void Render()
         {
             game.Graphics.Clear(Color.White);
-            game.Graphics.DrawImage(backGround, 0, 0);
+            game.Graphics.DrawImage(backGround, 0, 0, 800, 800);
 
             player.Render(game);
             game.Render();
