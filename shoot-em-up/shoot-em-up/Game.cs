@@ -30,12 +30,18 @@ namespace shoot_em_up
             if (e.KeyCode == Keys.J) player.BulletSpawn(bulletRockList);
         }
 
+        // Displaying the current status
         private void Render()
         {
             game.Graphics.Clear(Color.White);
+
+            //Draw the background
             game.Graphics.DrawImage(backGround, 0, 0, 800, 800);
 
+            //Draw the player
             player.Render(game);
+
+            //Draw bullets
             foreach (BulletRock bulletRock in bulletRockList)
             {
                 bulletRock.Render(game);
@@ -46,9 +52,13 @@ namespace shoot_em_up
         // Calculate the new state after 'interval' milliseconds have elapsed
         private void Update(int interval)
         {
-            foreach (BulletRock bulletRock in bulletRockList)
+
+            for (int i = bulletRockList.Count - 1; i >= 0; i--)
             {
-                bulletRock.Update(interval);
+                bulletRockList[i].Update(interval);
+
+                //If bullet is out of game space
+                if (bulletRockList[i].posY < 0) bulletRockList.Remove(bulletRockList[i]);
             }
 
             player.Update(interval);
