@@ -4,7 +4,7 @@ namespace shoot_em_up
     public partial class Game : Form
     {
         private Player player = new Player();
-        private List<BulletRock> bulletRockList = new List<BulletRock>();
+        private List<Bullet> bulletList = new List<Bullet>();
         Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;
@@ -27,7 +27,8 @@ namespace shoot_em_up
         {
             if (e.KeyCode == Keys.A) player.RightMove();
             if (e.KeyCode == Keys.D) player.LeftMove();
-            if (e.KeyCode == Keys.J) player.BulletSpawn(bulletRockList);
+            if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletType.Rock);
+            if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletType.Bishop);
         }
 
         // Displaying the current status
@@ -42,7 +43,7 @@ namespace shoot_em_up
             player.Render(game);
 
             //Draw bullets
-            foreach (BulletRock bulletRock in bulletRockList)
+            foreach (Bullet bulletRock in bulletList)
             {
                 bulletRock.Render(game);
             }
@@ -53,12 +54,12 @@ namespace shoot_em_up
         private void Update(int interval)
         {
 
-            for (int i = bulletRockList.Count - 1; i >= 0; i--)
+            for (int i = bulletList.Count - 1; i >= 0; i--)
             {
-                bulletRockList[i].Update(interval);
+                bulletList[i].Update(interval);
 
                 //If bullet is out of game space
-                if (bulletRockList[i].posY < 0) bulletRockList.Remove(bulletRockList[i]);
+                if (bulletList[i].posY < 0) bulletList.Remove(bulletList[i]);
             }
 
             player.Update(interval);

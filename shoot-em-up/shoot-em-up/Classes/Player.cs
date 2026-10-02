@@ -15,7 +15,7 @@ namespace shoot_em_up
 
         Image playerModel = Image.FromFile(@"Resources\King.png"); //player model
 
-        private int rockCoolDown = 0; // Interwal between rock's shots
+        private int coolDown = 0; // Interwal between shots
 
         public Player()
         {
@@ -35,18 +35,29 @@ namespace shoot_em_up
             if(posX < 700) posX += 100;
         }
 
-        public void BulletSpawn(List<BulletRock> rock)
+        //Spawn bullets
+        public void BulletSpawn(List<Bullet> bullets, Bullet.BulletType bulletType)
         {
-            if (rockCoolDown < 0)
+            if (coolDown < 0)
             {
-                rock.Add(new BulletRock(this));
-                rockCoolDown = Config.ROCK_COOL_DOWN;
+                switch (bulletType)
+                {
+                    case Bullet.BulletType.Rock:
+                        bullets.Add(new Bullet(this, Bullet.BulletType.Rock));
+                        coolDown = Config.COOL_DOWN;
+                        break;
+
+                    case Bullet.BulletType.Bishop:
+                        bullets.Add(new Bullet(this, Bullet.BulletType.Bishop));
+                        coolDown = Config.COOL_DOWN;
+                        break;
+                }
             }
         }
 
         public void Update(int interval)
         {
-            rockCoolDown -= interval;
+            coolDown -= interval;
         }
 
         public void Render(BufferedGraphics drawingSpace)

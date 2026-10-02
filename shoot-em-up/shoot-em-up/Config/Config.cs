@@ -14,7 +14,7 @@
 
         #region ================ Rock Bullet ================
 
-        public const int ROCK_COOL_DOWN = 300;
+        public const int COOL_DOWN = 300;
 
         #endregion
     }
