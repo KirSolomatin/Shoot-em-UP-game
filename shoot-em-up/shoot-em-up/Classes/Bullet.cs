@@ -13,7 +13,9 @@ namespace shoot_em_up
         private int bulletSpeed = 1;                        //Bullet speed
         private int bulletSizeX = 50;
         private int bulletSizeY = 50;
+
         private BulletType bulletType;
+        private DirectionHelper.Directions direction;       //The direction in which a bullet will travel if knight or bishop
 
         public enum BulletType {Rock, Bishop, Knight};
 
@@ -35,6 +37,12 @@ namespace shoot_em_up
 
                 case BulletType.Bishop:
                     texture = Image.FromFile(@"Resources\bishop.png");
+                    direction = DirectionHelper.ChooseRandomDirection();
+                    break;
+
+                case BulletType.Knight:
+                    texture = Image.FromFile(@"Resources\knight.png");
+                    direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
                 default:
@@ -48,13 +56,26 @@ namespace shoot_em_up
         {
             switch (type)
             {
+                //Rock movement
                 case BulletType.Rock:
                     posY -= bulletSpeed * interval;
                     break;
 
+                //Bishop movement
                 case BulletType.Bishop:
                     posY -= bulletSpeed * interval;
-                    posX -= bulletSpeed * interval;
+                    if (direction == DirectionHelper.Directions.Left) posX -= bulletSpeed * interval;
+                    else posX += bulletSpeed * interval;
+                    break;
+
+                //Knight movement
+                case BulletType.Knight:
+                    while(posY < 600)
+                    {
+                        posY -= bulletSpeed * interval;
+                    }
+                    if (direction == DirectionHelper.Directions.Left) posX -= bulletSpeed * interval;
+                    else posX += bulletSpeed * interval;
                     break;
             }
         }
@@ -68,7 +89,7 @@ namespace shoot_em_up
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(texture, posX + bulletSizeX/2, posY, bulletSizeX, bulletSizeY);
+            drawingSpace.Graphics.DrawImage(texture, posX + bulletSizeX/2, posY + bulletSizeX / 2, bulletSizeX, bulletSizeY);
         }
     }
 }

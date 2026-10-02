@@ -59,7 +59,7 @@ namespace shoot_em_up
                 bulletList[i].Update(interval);
 
                 //If bullet is out of game space
-                if (bulletList[i].posY < 0) bulletList.Remove(bulletList[i]);
+                if (bulletList[i].posY < -10 || bulletList[i].posX < -50 || bulletList[i].posX > 810) bulletList.Remove(bulletList[i]);
             }
 
             player.Update(interval);
