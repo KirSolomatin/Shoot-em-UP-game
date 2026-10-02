@@ -24,13 +24,13 @@ namespace shoot_em_up
         }
 
         //Movement to the right
-        public void RightMove()
+        public void LeftMove()
         {
             if(posX > 0) posX -= 100;
         }
 
         //Movement to the left
-        public void LeftMove()
+        public void RightMove()
         {
             if(posX < 700) posX += 100;
         }
@@ -40,18 +40,8 @@ namespace shoot_em_up
         {
             if (coolDown < 0)
             {
-                switch (bulletType)
-                {
-                    case Bullet.BulletType.Rock:
-                        bullets.Add(new Bullet(this, Bullet.BulletType.Rock));
-                        coolDown = Config.COOL_DOWN;
-                        break;
-
-                    case Bullet.BulletType.Bishop:
-                        bullets.Add(new Bullet(this, Bullet.BulletType.Bishop));
-                        coolDown = Config.COOL_DOWN;
-                        break;
-                }
+                bullets.Add(new Bullet(this, bulletType));
+                coolDown = Config.COOL_DOWN;
             }
         }
 

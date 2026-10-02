@@ -25,10 +25,11 @@ namespace shoot_em_up
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.A) player.RightMove();
-            if (e.KeyCode == Keys.D) player.LeftMove();
+            if (e.KeyCode == Keys.D) player.RightMove();
+            if (e.KeyCode == Keys.A) player.LeftMove();
             if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletType.Rock);
             if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletType.Bishop);
+            if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletType.Knight);
         }
 
         // Displaying the current status
@@ -59,7 +60,11 @@ namespace shoot_em_up
                 bulletList[i].Update(interval);
 
                 //If bullet is out of game space
-                if (bulletList[i].posY < -10 || bulletList[i].posX < -50 || bulletList[i].posX > 810) bulletList.Remove(bulletList[i]);
+                if (bulletList[i].isFinished || 
+                    bulletList[i].posY < -10 || 
+                    bulletList[i].posX < -50 || 
+                    bulletList[i].posX > 810) 
+                    bulletList.Remove(bulletList[i]);
             }
 
             player.Update(interval);
