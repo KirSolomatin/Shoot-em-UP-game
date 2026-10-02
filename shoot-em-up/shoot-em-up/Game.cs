@@ -1,10 +1,10 @@
-
 namespace shoot_em_up
 {
     public partial class Game : Form
     {
-        private Player player = new Player();
-        private List<Bullet> bulletList = new List<Bullet>();
+        private Player player = new Player(); //Player
+        private List<Bullet> bulletList = new List<Bullet>(); //List of bullets
+        private List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
         Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;
@@ -14,6 +14,8 @@ namespace shoot_em_up
         {
             InitializeComponent();
             this.KeyPreview = true;                             //Allows keyboard input to be detected even when the focus is on another element
+
+            obstacleList = Obstacle.GenerateObstacle(3);
 
             // Gets a reference to the current BufferedGraphicsContext
             currentContext = BufferedGraphicsManager.Current;
@@ -47,6 +49,11 @@ namespace shoot_em_up
             foreach (Bullet bulletRock in bulletList)
             {
                 bulletRock.Render(game);
+            }
+
+            foreach (Obstacle obstacle in obstacleList)
+            {
+                obstacle.Render(game);
             }
             game.Render();
         }
