@@ -3,8 +3,8 @@ namespace shoot_em_up
     public partial class Game : Form
     {
         private Player player = new Player(); //Player
-        private List<Bullet> bulletList = new List<Bullet>(); //List of bullets
-        private List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
+        internal static List<Bullet> bulletList = new List<Bullet>(); //List of bullets
+        internal static List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
         Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;

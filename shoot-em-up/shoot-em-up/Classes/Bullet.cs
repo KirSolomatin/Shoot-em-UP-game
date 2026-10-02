@@ -99,6 +99,16 @@ namespace shoot_em_up
             }
         }
 
+        private void OnHit()
+        {
+            for (int i = 0; i < Game.bulletList.Count(); i++)
+            {
+                for (int j = 0; j < Game.obstacleList.Count(); j++)
+                {
+                    Game.bulletList[i].Intersects
+                }
+            }
+        }
         // This method calculates the bullet's new state after
         // 'interval' milliseconds have elapsed
         public void Update(int interval)
