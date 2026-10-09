@@ -15,13 +15,15 @@ namespace shoot_em_up
         //Note where the bullet came from
         public int startY { get; private set; }
         public int startX { get; private set; }
-        public bool isFinished { get; private set; }// true when the bullet has travelled its path
+        public bool isDestroyed { get; set; }// true when the bullet has travelled its path
 
         private int bulletSpeed = 1;                        //Bullet speed
         private int bulletSizeX = 50;
         private int bulletSizeY = 50;
+        //Collision for an bullet 
+        public Rectangle bulletCollision;
 
-        private BulletType bulletType;
+        public BulletType bulletType { get; private set; }
         private DirectionHelper.Directions direction;       //The direction in which a bullet will travel if knight or bishop
 
         public enum BulletType { Rock, Bishop, Knight };
@@ -59,6 +61,8 @@ namespace shoot_em_up
                     texture = Image.FromFile(@"Resources\Rock.png");
                     break;
             }
+
+            bulletCollision = new Rectangle(posX + bulletSizeX / 2, posY - bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
 
         //Bullet vertical movement
@@ -73,9 +77,9 @@ namespace shoot_em_up
 
                 //Bishop movement
                 case BulletType.Bishop:
-                    posY -= bulletSpeed * interval;
                     if (direction == DirectionHelper.Directions.Left) posX -= bulletSpeed * interval;
                     else posX += bulletSpeed * interval;
+                    posY -= bulletSpeed * interval;
                     break;
 
                 //Knight movement
@@ -93,22 +97,15 @@ namespace shoot_em_up
                     }
                     else
                     {
-                        isFinished = true;
+                        isDestroyed = true;
                     }
                     break;
             }
+
+            //Update collision every tick 
+            bulletCollision = new Rectangle(posX + bulletSizeX / 2, posY - bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
 
-        private void OnHit()
-        {
-            for (int i = 0; i < Game.bulletList.Count(); i++)
-            {
-                for (int j = 0; j < Game.obstacleList.Count(); j++)
-                {
-                    Game.bulletList[i].Intersects
-                }
-            }
-        }
         // This method calculates the bullet's new state after
         // 'interval' milliseconds have elapsed
         public void Update(int interval)
@@ -118,7 +115,7 @@ namespace shoot_em_up
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(texture, posX + bulletSizeX / 2, posY + bulletSizeX / 2, bulletSizeX, bulletSizeY);
+            drawingSpace.Graphics.DrawImage(texture, posX + bulletSizeX / 2, posY + bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
     }
 }

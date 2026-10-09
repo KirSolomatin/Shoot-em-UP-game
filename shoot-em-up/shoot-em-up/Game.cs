@@ -67,7 +67,7 @@ namespace shoot_em_up
                 bulletList[i].Update(interval);
 
                 //If bullet is out of game space
-                if (bulletList[i].isFinished || 
+                if (bulletList[i].isDestroyed || 
                     bulletList[i].posY < -10 || 
                     bulletList[i].posX < -50 || 
                     bulletList[i].posX > 810) 
@@ -75,6 +75,9 @@ namespace shoot_em_up
             }
 
             player.Update(interval);
+
+            //Check if bullet intersects with obstacle every tick
+            CheckWallCollision();
         }
 
         //Method called every frame
@@ -87,6 +90,22 @@ namespace shoot_em_up
         private void Game_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void CheckWallCollision()
+        {
+
+            for (int i = bulletList.Count - 1; i >= 0; i--)
+            {
+                for (int j = 0; j < obstacleList.Count; j++)
+                {
+                    if (bulletList[i].bulletCollision.IntersectsWith(obstacleList[j].obstacleCollision) && bulletList[i].bulletType != Bullet.BulletType.Knight)
+                    {
+                        bulletList.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
         }
     }
 }

@@ -14,10 +14,14 @@ namespace shoot_em_up
         private int sizeY = 100;
 
         private Image texture = Image.FromFile(@"Resources\Pawn.png");
+        public Rectangle obstacleCollision;
 
         public Obstacle (int posX)
         {
             this.posX = posX;
+
+            //Initialization collision for an obstacle
+            obstacleCollision = new Rectangle(posX, posY, sizeX, sizeY);
         }
 
         //Methode who can generate any obstacle's number 
