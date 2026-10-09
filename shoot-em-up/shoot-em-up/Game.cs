@@ -19,7 +19,7 @@ namespace shoot_em_up
             InitializeComponent();
             this.KeyPreview = true;                             //Allows keyboard input to be detected even when the focus is on another element
 
-            obstacleList = Obstacle.GenerateObstacle(3);
+            obstacleList = Obstacle.GenerateObstacle(6);
 
             // Gets a reference to the current BufferedGraphicsContext
             currentContext = BufferedGraphicsManager.Current;
@@ -93,6 +93,7 @@ namespace shoot_em_up
             //Check if bullet intersects with obstacle every tick if the case delete bullet
             CollisionHelper.CheckBulletCollision();
 
+            CollisionHelper.CheckEnemyCollision();
             //Counting down the time until the next enemy
             _enemySpawnCoolDown -= interval;
 

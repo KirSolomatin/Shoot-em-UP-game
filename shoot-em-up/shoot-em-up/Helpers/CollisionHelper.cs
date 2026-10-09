@@ -32,7 +32,26 @@ namespace shoot_em_up.Helpers
                     if (Game.bulletList[i].bulletCollision.IntersectsWith(Game.enemyList[k].enemyCollision))
                     {
                         Game.enemyList.RemoveAt(k);
-                        if (Game.bulletList[i].bulletType != Bullet.BulletType.Bishop) Game.bulletList.RemoveAt(i);
+                        if (Game.bulletList[i].bulletType != Bullet.BulletType.Bishop)
+                        {
+                            Game.bulletList.RemoveAt(i);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void CheckEnemyCollision()
+        {
+            for (int i = Game.enemyList.Count - 1; i >= 0; i--)
+            {
+                for (int j = Game.obstacleList.Count - 1; j >= 0; j--)
+                {
+                    if (Game.enemyList[i].enemyCollision.IntersectsWith(Game.obstacleList[j].obstacleCollision))
+                    {
+                        Game.enemyList.RemoveAt(i);
+                        Game.obstacleList.RemoveAt(j);
                         break;
                     }
                 }
