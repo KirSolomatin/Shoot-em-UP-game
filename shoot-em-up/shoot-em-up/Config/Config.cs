@@ -34,6 +34,7 @@
             new Point(700, -100)
         };
 
+        //Interval between enemy spawns, not constant because as the score goes up, the interval goes down to make the game more challenging
         public static int enemySpawnCoolDown = 3000;
 
         #endregion

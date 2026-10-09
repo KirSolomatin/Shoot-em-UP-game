@@ -1,3 +1,5 @@
+using shoot_em_up.Helpers;
+
 namespace shoot_em_up
 {
     public partial class Game : Form
@@ -5,7 +7,8 @@ namespace shoot_em_up
         private Player player = new Player(); //Player
         internal static List<Bullet> bulletList = new List<Bullet>(); //List of bullets
         internal static List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
-        internal static List<Enemy> enemyList = new List<Enemy>();
+        internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
+        private int _enemySpawnCoolDown = Config.enemySpawnCoolDown;
         Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;
@@ -80,16 +83,25 @@ namespace shoot_em_up
                     bulletList.Remove(bulletList[i]);
             }
 
-            foreach (Enemy enemy in enemyList)
+            for (int i = enemyList.Count - 1; i >= 0; i--)
             {
-                enemy.Update(interval);
+                enemyList[i].Update(interval);
             }
 
             player.Update(interval);
 
-            Enemy.SpawnEnemy();
-            //Check if bullet intersects with obstacle every tick
-            CheckWallCollision();
+            //Check if bullet intersects with obstacle every tick if the case delete bullet
+            CollisionHelper.CheckBulletCollision();
+
+            //Counting down the time until the next enemy
+            _enemySpawnCoolDown -= interval;
+
+            //If cooldown under 0 spawn enemy
+            if (_enemySpawnCoolDown <= 0)
+            {
+                Enemy.SpawnEnemy();
+                _enemySpawnCoolDown = Config.enemySpawnCoolDown;
+            }
         }
 
         //Method called every frame
@@ -102,22 +114,6 @@ namespace shoot_em_up
         private void Game_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void CheckWallCollision()
-        {
-
-            for (int i = bulletList.Count - 1; i >= 0; i--)
-            {
-                for (int j = 0; j < obstacleList.Count; j++)
-                {
-                    if (bulletList[i].bulletCollision.IntersectsWith(obstacleList[j].obstacleCollision) && bulletList[i].bulletType != Bullet.BulletType.Knight)
-                    {
-                        bulletList.RemoveAt(i);
-                        break;
-                    }
-                }
-            }
         }
     }
 }

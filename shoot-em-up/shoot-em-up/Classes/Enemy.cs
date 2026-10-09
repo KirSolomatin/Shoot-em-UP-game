@@ -19,15 +19,18 @@ namespace shoot_em_up
 
         public float speed = 0.3f;
 
-        private int _spawnCoolDown = 0;
+        //Collision for an enemy 
+        public Rectangle enemyCollision;
 
         public Enemy()
         {
             //Set the start position
-            Position = Config.enemySpawnPoints[RandomHelper.Next(Config.enemySpawnPoints.Length - 1)];
+            Position = Config.enemySpawnPoints[RandomHelper.Next(Config.enemySpawnPoints.Length)];
 
             _size.X = 100;
             _size.Y = 100;
+
+            enemyCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
         }
 
         //Enemy movement
@@ -39,14 +42,9 @@ namespace shoot_em_up
         public void Update(int interval)
         {
             Move(interval);
-            _spawnCoolDown -= interval;
 
-            //SpawnEnemy();
-            //if(_spawnCoolDown <= 0)
-            //{
-            //    SpawnEnemy();
-            //    _spawnCoolDown = Config.enemySpawnCoolDown;
-            //}
+            //Update collision every tick 
+            enemyCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
         }
 
         public void Render(BufferedGraphics drawingSpace)
