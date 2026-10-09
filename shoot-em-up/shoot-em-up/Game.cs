@@ -5,6 +5,7 @@ namespace shoot_em_up
         private Player player = new Player(); //Player
         internal static List<Bullet> bulletList = new List<Bullet>(); //List of bullets
         internal static List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
+        internal static List<Enemy> enemyList = new List<Enemy>();
         Image backGround = Image.FromFile(@"Resources\background.png"); //
 
         BufferedGraphicsContext currentContext;
@@ -55,6 +56,11 @@ namespace shoot_em_up
             {
                 obstacle.Render(game);
             }
+
+            foreach (Enemy enemy in enemyList)
+            {
+                enemy.Render(game);
+            }
             game.Render();
         }
 
@@ -74,8 +80,14 @@ namespace shoot_em_up
                     bulletList.Remove(bulletList[i]);
             }
 
+            foreach (Enemy enemy in enemyList)
+            {
+                enemy.Update(interval);
+            }
+
             player.Update(interval);
 
+            Enemy.SpawnEnemy();
             //Check if bullet intersects with obstacle every tick
             CheckWallCollision();
         }

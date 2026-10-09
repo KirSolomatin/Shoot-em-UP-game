@@ -17,7 +17,7 @@ namespace shoot_em_up
         public int startX { get; private set; }
         public bool isDestroyed { get; set; }// true when the bullet has travelled its path
 
-        private int bulletSpeed = 1;                        //Bullet speed
+        private float bulletSpeed = 1.3f;                        //Bullet speed
         private int bulletSizeX = 50;
         private int bulletSizeY = 50;
         //Collision for an bullet 
@@ -66,34 +66,34 @@ namespace shoot_em_up
         }
 
         //Bullet vertical movement
-        private void BulletMovement(int interval, BulletType type)
+        private void Move(int interval, BulletType type)
         {
             switch (type)
             {
                 //Rock movement
                 case BulletType.Rock:
-                    posY -= bulletSpeed * interval;
+                    posY -= (int)(bulletSpeed * interval);
                     break;
 
                 //Bishop movement
                 case BulletType.Bishop:
-                    if (direction == DirectionHelper.Directions.Left) posX -= bulletSpeed * interval;
-                    else posX += bulletSpeed * interval;
-                    posY -= bulletSpeed * interval;
+                    if (direction == DirectionHelper.Directions.Left) posX -= (int)(bulletSpeed * interval);
+                    else posX += (int)(bulletSpeed * interval);
+                    posY -= (int)(bulletSpeed * interval);
                     break;
 
                 //Knight movement
                 case BulletType.Knight:
                     if (startY - posY < 200)          //Hasn't scrolled 200 px upwards yet
                     {
-                        posY -= bulletSpeed * interval;
+                        posY -= (int)(bulletSpeed * interval);
                     }
                     else if (Math.Abs(startX - posX) < 100)
                     {
                         if (direction == DirectionHelper.Directions.Left)
-                            posX -= bulletSpeed * interval;
+                            posX -= (int)(bulletSpeed * interval);
                         else if (direction == DirectionHelper.Directions.Right)
-                            posX += bulletSpeed * interval;
+                            posX += (int)(bulletSpeed * interval);
                     }
                     else
                     {
@@ -110,7 +110,7 @@ namespace shoot_em_up
         // 'interval' milliseconds have elapsed
         public void Update(int interval)
         {
-            BulletMovement(interval, this.bulletType);
+            Move(interval, this.bulletType);
         }
 
         public void Render(BufferedGraphics drawingSpace)

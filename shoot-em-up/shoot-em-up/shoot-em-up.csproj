@@ -13,6 +13,7 @@
     <None Remove="Resources\background.jpg" />
     <None Remove="Resources\background.png" />
     <None Remove="Resources\bishop.png" />
+    <None Remove="Resources\Enemy.png" />
     <None Remove="Resources\King.png" />
     <None Remove="Resources\knight.png" />
     <None Remove="Resources\Pawn.png" />
@@ -24,6 +25,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\bishop.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Enemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\King.png">

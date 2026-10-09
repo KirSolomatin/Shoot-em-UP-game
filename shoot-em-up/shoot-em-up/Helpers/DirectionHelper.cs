@@ -1,4 +1,5 @@
-﻿using System;
+﻿using shoot_em_up.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,8 +17,7 @@ namespace shoot_em_up
 
         public static Directions ChooseRandomDirection()
         {
-            Random random = new Random();
-            return (DirectionHelper.Directions)random.Next(2);
+            return (DirectionHelper.Directions)RandomHelper.random.Next(2);
         }
     }
 }

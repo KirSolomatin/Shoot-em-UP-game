@@ -12,9 +12,29 @@
 
         #endregion
 
-        #region ================ Rock Bullet ================
+        #region ================ Bullet ================
 
         public const int COOL_DOWN = 300;
+
+        #endregion
+
+        #region ================ Enemy ================
+        //Possible spawn points for enemy
+        //There are 8 spawn points corresponding to each square on a chessboard
+        //y position = -100, enemy spawns outside the window
+        public static Point[] enemySpawnPoints =
+        {
+            new Point(0, -100),
+            new Point(100, -100),
+            new Point(200, -100),
+            new Point(300, -100),
+            new Point(400, -100),
+            new Point(500, -100),
+            new Point(600, -100),
+            new Point(700, -100)
+        };
+
+        public static int enemySpawnCoolDown = 3000;
 
         #endregion
     }
