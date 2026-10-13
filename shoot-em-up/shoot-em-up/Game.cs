@@ -64,6 +64,8 @@ namespace shoot_em_up
             {
                 enemy.Render(game);
             }
+
+            ScoreSystem.Render(game);
             game.Render();
         }
 
@@ -103,6 +105,8 @@ namespace shoot_em_up
                 Enemy.SpawnEnemy();
                 _enemySpawnCoolDown = Config.enemySpawnCoolDown;
             }
+
+            ScoreSystem.Update(interval);
         }
 
         //Method called every frame

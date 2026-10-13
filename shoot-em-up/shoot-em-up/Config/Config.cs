@@ -38,5 +38,9 @@
         public static int enemySpawnCoolDown = 3000;
 
         #endregion
+
+        #region ================ Score System ================
+        public const int TIME_FOR_POINT = 500;
+        #endregion
     }
 }
