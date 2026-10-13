@@ -32,6 +32,8 @@ namespace shoot_em_up.Helpers
                     if (Game.bulletList[i].bulletCollision.IntersectsWith(Game.enemyList[k].enemyCollision))
                     {
                         Game.enemyList.RemoveAt(k);
+                        //plus 10 points for every killed enemy
+                        ScoreSystem.score += 10;
                         if (Game.bulletList[i].bulletType != Bullet.BulletType.Bishop)
                         {
                             Game.bulletList.RemoveAt(i);
