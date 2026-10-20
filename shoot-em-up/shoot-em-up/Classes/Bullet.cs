@@ -18,8 +18,8 @@ namespace shoot_em_up
         public bool isDestroyed { get; set; }// true when the bullet has travelled its path
 
         private float bulletSpeed = 1.3f;                        //Bullet speed
-        private int bulletSizeX = 50;
-        private int bulletSizeY = 50;
+        private int bulletSizeX = 100;
+        private int bulletSizeY = 100;
         //Collision for an bullet 
         public Rectangle bulletCollision;
 
@@ -115,7 +115,7 @@ namespace shoot_em_up
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(texture, posX + bulletSizeX / 2, posY + bulletSizeY / 2, bulletSizeX, bulletSizeY);
+            drawingSpace.Graphics.DrawImage(texture, posX, posY, bulletSizeX, bulletSizeY);
         }
     }
 }
