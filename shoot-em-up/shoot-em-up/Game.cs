@@ -1,3 +1,4 @@
+using shoot_em_up.GameState;
 using shoot_em_up.Helpers;
 
 namespace shoot_em_up
@@ -9,7 +10,11 @@ namespace shoot_em_up
         internal static List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
         internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
         private int _enemySpawnCoolDown = Config.enemySpawnCoolDown;
-        Image backGround = Image.FromFile(@"Resources\background.png"); //
+        Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
+        private GameStates currentState = GameStates.GameOver;  //Current game state
+
+        //Screen size
+        public static Point gameSize { get; private set; } = new Point(800, 800);
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics game;
@@ -31,11 +36,14 @@ namespace shoot_em_up
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.D) player.RightMove();
-            if (e.KeyCode == Keys.A) player.LeftMove();
-            if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletType.Rock);
-            if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletType.Bishop);
-            if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletType.Knight);
+            if (currentState == GameStates.Game)
+            {
+                if (e.KeyCode == Keys.D) player.RightMove();
+                if (e.KeyCode == Keys.A) player.LeftMove();
+                if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletType.Rock);
+                if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletType.Bishop);
+                if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletType.Knight);
+            }
         }
 
         // Displaying the current status
@@ -43,30 +51,47 @@ namespace shoot_em_up
         {
             game.Graphics.Clear(Color.White);
 
-            //Draw the background
-            game.Graphics.DrawImage(backGround, 0, 0, 800, 800);
-
-            //Draw the player
-            player.Render(game);
-
-            //Draw bullets
-            foreach (Bullet bulletRock in bulletList)
+            switch(currentState)
             {
-                bulletRock.Render(game);
+                //If the game in progress 
+                case GameStates.Game:
+
+                    //Draw the background
+                    game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
+
+                    //Draw the player
+                    player.Render(game);
+
+                    //Draw bullets
+                    foreach (Bullet bulletRock in bulletList)
+                    {
+                        bulletRock.Render(game);
+                    }
+
+                    foreach (Obstacle obstacle in obstacleList)
+                    {
+                        obstacle.Render(game);
+                    }
+
+                    foreach (Enemy enemy in enemyList)
+                    {
+                        enemy.Render(game);
+                    }
+
+                    ScoreSystem.Render(game);
+
+                    break;
+
+                //If the game is done
+                case GameStates.GameOver:
+                    //Draw the background
+                    game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
+                    GameOver.Render(game);
+                    break;
             }
 
-            foreach (Obstacle obstacle in obstacleList)
-            {
-                obstacle.Render(game);
-            }
-
-            foreach (Enemy enemy in enemyList)
-            {
-                enemy.Render(game);
-            }
-
-            ScoreSystem.Render(game);
             game.Render();
+
         }
 
         // Calculate the new state after 'interval' milliseconds have elapsed
@@ -113,7 +138,8 @@ namespace shoot_em_up
         private void NewFrame(object sender, EventArgs e)
         {
             this.Render();
-            this.Update(timer.Interval);
+
+            if (currentState == GameStates.Game) this.Update(timer.Interval); //Update the gameplay only while the game is in progress, not on the loss screen
         }
 
         private void Game_Load(object sender, EventArgs e)
