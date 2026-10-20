@@ -1,4 +1,3 @@
-using shoot_em_up.GameState;
 using shoot_em_up.Helpers;
 
 namespace shoot_em_up
@@ -11,7 +10,7 @@ namespace shoot_em_up
         internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
         private int _enemySpawnCoolDown = Config.enemySpawnCoolDown;
         Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
-        private GameStates currentState = GameStates.GameOver;  //Current game state
+        private GameStates currentState = GameStates.Game;  //Current game state
 
         //Screen size
         public static Point gameSize { get; private set; } = new Point(800, 800);
@@ -113,6 +112,12 @@ namespace shoot_em_up
             for (int i = enemyList.Count - 1; i >= 0; i--)
             {
                 enemyList[i].Update(interval);
+
+                //Loss condition
+                if (enemyList[i].Position.Y >= 700)
+                {
+                    currentState = GameStates.GameOver;
+                }
             }
 
             player.Update(interval);
