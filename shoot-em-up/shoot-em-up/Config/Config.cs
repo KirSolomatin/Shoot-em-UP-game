@@ -34,8 +34,10 @@
             new Point(700, -100)
         };
 
+        //The default value for the enemy spawn cooldown, need to restart the game
+        public const int DEFAULT_ENEMY_SPAWN_COOLDOWN = 3000;
         //Interval between enemy spawns, not constant because as the score goes up, the interval goes down to make the game more challenging
-        public static int enemySpawnCoolDown = 3000;
+        public static int EnemySpawnCoolDown { get; set; } = DEFAULT_ENEMY_SPAWN_COOLDOWN;
 
         #endregion
 

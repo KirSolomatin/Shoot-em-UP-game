@@ -61,8 +61,6 @@ namespace shoot_em_up
                     texture = Image.FromFile(@"Resources\Rock.png");
                     break;
             }
-
-            bulletCollision = new Rectangle(posX + bulletSizeX / 2, posY - bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
 
         //Bullet vertical movement
@@ -73,6 +71,9 @@ namespace shoot_em_up
                 //Rock movement
                 case BulletType.Rock:
                     posY -= (int)(bulletSpeed * interval);
+
+                    //Update collision every tick 
+                    bulletCollision = new Rectangle(posX, posY, bulletSizeX / 2, bulletSizeY / 2);
                     break;
 
                 //Bishop movement
@@ -80,6 +81,9 @@ namespace shoot_em_up
                     if (direction == DirectionHelper.Directions.Left) posX -= (int)(bulletSpeed * interval);
                     else posX += (int)(bulletSpeed * interval);
                     posY -= (int)(bulletSpeed * interval);
+
+                    //Update collision every tick 
+                    bulletCollision = new Rectangle(posX, posY, bulletSizeX / 2, bulletSizeY / 4);
                     break;
 
                 //Knight movement
@@ -99,11 +103,10 @@ namespace shoot_em_up
                     {
                         isDestroyed = true;
                     }
+
+                    bulletCollision = new Rectangle(posX, posY, bulletSizeX, bulletSizeY);
                     break;
             }
-
-            //Update collision every tick 
-            bulletCollision = new Rectangle(posX + bulletSizeX / 2, posY - bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
 
         // This method calculates the bullet's new state after

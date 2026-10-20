@@ -8,7 +8,7 @@ namespace shoot_em_up
         internal static List<Bullet> bulletList = new List<Bullet>(); //List of bullets
         internal static List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
         internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
-        private int _enemySpawnCoolDown = Config.enemySpawnCoolDown;
+        private int _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
         Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
         private GameStates currentState = GameStates.Game;  //Current game state
 
@@ -43,6 +43,8 @@ namespace shoot_em_up
                 if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletType.Bishop);
                 if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletType.Knight);
             }
+
+            if (currentState == GameStates.GameOver && e.KeyCode == Keys.R) RestartGame();
         }
 
         // Displaying the current status
@@ -133,7 +135,7 @@ namespace shoot_em_up
             if (_enemySpawnCoolDown <= 0)
             {
                 Enemy.SpawnEnemy();
-                _enemySpawnCoolDown = Config.enemySpawnCoolDown;
+                _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
             }
 
             ScoreSystem.Update(interval);
@@ -150,6 +152,22 @@ namespace shoot_em_up
         private void Game_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void RestartGame()
+        {
+            // Clear away everything left over from the previous batch
+            bulletList.Clear();
+            enemyList.Clear();
+            obstacleList = Obstacle.GenerateObstacle(6);
+
+            player = new Player();
+            // Reset the difficulty, score and the enemy spawn timer
+            Config.EnemySpawnCoolDown = Config.DEFAULT_ENEMY_SPAWN_COOLDOWN;
+            _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
+            ScoreSystem.Score = 0;
+            
+            currentState = GameStates.Game;
         }
     }
 }
