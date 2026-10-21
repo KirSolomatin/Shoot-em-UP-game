@@ -36,9 +36,13 @@
 
         //The default value for the enemy spawn cooldown, need to restart the game
         public const int DEFAULT_ENEMY_SPAWN_COOLDOWN = 3000;
+        //Enemy respawn cooldown at the highest difficulty level
+        public const int MINIMUM_ENEMY_SPAWN_COOLDOWN = 300;
         //Interval between enemy spawns, not constant because as the score goes up, the interval goes down to make the game more challenging
         public static int EnemySpawnCoolDown { get; set; } = DEFAULT_ENEMY_SPAWN_COOLDOWN;
-
+        //Enemy speed at the highest difficulty level
+        public const float MAXIMUM_ENEMY_SPEED = 0.8F;
+        public const float DEFAULT_ENEMY_SPEED = 0.3f;
         #endregion
 
         #region ================ Score System ================

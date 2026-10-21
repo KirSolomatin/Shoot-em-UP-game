@@ -17,6 +17,8 @@ namespace shoot_em_up
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics game;
+        //The difficulty level increases as your score goes up
+        private int _difficultyLevel = 0;
 
         public Game()
         {
@@ -98,6 +100,8 @@ namespace shoot_em_up
         // Calculate the new state after 'interval' milliseconds have elapsed
         private void Update(int interval)
         {
+            //Difficulty level increasing every 30 points
+            _difficultyLevel = ScoreSystem.Score / 30;
 
             for (int i = bulletList.Count - 1; i >= 0; i--)
             {
@@ -120,6 +124,8 @@ namespace shoot_em_up
                 {
                     currentState = GameStates.GameOver;
                 }
+
+                enemyList[i].speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
             }
 
             player.Update(interval);
@@ -135,7 +141,8 @@ namespace shoot_em_up
             if (_enemySpawnCoolDown <= 0)
             {
                 Enemy.SpawnEnemy();
-                _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
+                //Calculate new enemy cooldown based on difficulty level
+                _enemySpawnCoolDown = Math.Max(Config.MINIMUM_ENEMY_SPAWN_COOLDOWN, Config.DEFAULT_ENEMY_SPAWN_COOLDOWN - _difficultyLevel * 100);
             }
 
             ScoreSystem.Update(interval);
@@ -161,10 +168,12 @@ namespace shoot_em_up
             enemyList.Clear();
             obstacleList = Obstacle.GenerateObstacle(6);
 
+            //
             player = new Player();
             // Reset the difficulty, score and the enemy spawn timer
             Config.EnemySpawnCoolDown = Config.DEFAULT_ENEMY_SPAWN_COOLDOWN;
             _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
+            _difficultyLevel = 0;
             ScoreSystem.Score = 0;
             
             currentState = GameStates.Game;

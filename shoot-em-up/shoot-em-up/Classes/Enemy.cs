@@ -17,7 +17,7 @@ namespace shoot_em_up
         //Enemy model
         private Image _texture = Image.FromFile(@"Resources\Enemy.png");
 
-        public float speed = 0.3f;
+        public float speed { get; set; } = Config.DEFAULT_ENEMY_SPEED;
 
         //Collision for an enemy 
         public Rectangle enemyCollision;
