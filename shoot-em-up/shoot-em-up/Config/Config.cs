@@ -50,7 +50,7 @@
         #endregion
 
         #region ================ Boss ================
-        public const int DEFAULT_BOSS_ATACK_COOLDOWN = 2000;
+        public const int DEFAULT_BOSS_ATACK_COOLDOWN = 1500;
         #endregion
     }
 }

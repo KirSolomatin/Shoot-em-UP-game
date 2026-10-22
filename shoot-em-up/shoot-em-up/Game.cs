@@ -10,7 +10,7 @@ namespace shoot_em_up
         internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
         private int _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
         Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
-        private GameStates currentState = GameStates.Game;  //Current game state
+        private GameStates _currentState = GameStates.Game;  //Current game state
 
         internal static Boss? boss;
 
@@ -38,7 +38,7 @@ namespace shoot_em_up
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
-            if (currentState == GameStates.Game)
+            if (_currentState == GameStates.Game)
             {
                 if (e.KeyCode == Keys.D) player.RightMove();
                 if (e.KeyCode == Keys.A) player.LeftMove();
@@ -47,7 +47,7 @@ namespace shoot_em_up
                 if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletType.Knight);
             }
 
-            if (currentState == GameStates.GameOver && e.KeyCode == Keys.R) RestartGame();
+            if ((_currentState == GameStates.GameOver || _currentState == GameStates.GameWon) && e.KeyCode == Keys.R) RestartGame();
         }
 
         // Displaying the current status
@@ -55,7 +55,7 @@ namespace shoot_em_up
         {
             game.Graphics.Clear(Color.White);
 
-            switch(currentState)
+            switch(_currentState)
             {
                 //If the game in progress 
                 case GameStates.Game:
@@ -94,6 +94,12 @@ namespace shoot_em_up
                     game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
                     GameOver.Render(game);
                     break;
+                //If the game is won
+                case GameStates.GameWon:
+                    //Draw the background
+                    game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
+                    GameWon.Render(game);
+                    break;
             }
             game.Render();
         }
@@ -121,9 +127,9 @@ namespace shoot_em_up
                 enemyList[i].Update(interval);
 
                 //Loss condition
-                if (enemyList[i].Position.Y >= 700)
+                if (enemyList[i].Position.Y >= 700 || boss?.Position.Y >= 700)
                 {
-                    currentState = GameStates.GameOver;
+                    _currentState = GameStates.GameOver;
                 }
 
                 enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
@@ -131,8 +137,8 @@ namespace shoot_em_up
 
             player.Update(interval);
 
-            //If player have more then 700 points, spawn the boss
-            if(ScoreSystem.Score >= 7 && boss == null)
+            //If player have more then 500 points, spawn the boss
+            if(ScoreSystem.Score >= 5 && boss == null)
             {
                 boss = new Boss();
             }
@@ -143,6 +149,7 @@ namespace shoot_em_up
             if(boss?.Health <= 0)
             {
                 boss = null;
+                _currentState = GameStates.GameWon;
             }
 
             //Check if bullet intersects with obstacle every tick if the case delete bullet
@@ -152,8 +159,8 @@ namespace shoot_em_up
             //Counting down the time until the next enemy
             _enemySpawnCoolDown -= interval;
 
-            //If cooldown under 0 spawn enemy. Stop enemy spawn if player has more than 700 points
-            if (_enemySpawnCoolDown <= 0 && ScoreSystem.Score < 700)
+            //If cooldown under 0 spawn enemy. Stop enemy spawn if player has more than 500 points
+            if (_enemySpawnCoolDown <= 0 && ScoreSystem.Score < 500)
             {
                 Enemy.SpawnEnemy();
                 //Calculate new enemy cooldown based on difficulty level
@@ -168,7 +175,7 @@ namespace shoot_em_up
         {
             this.Render();
 
-            if (currentState == GameStates.Game) this.Update(timer.Interval); //Update the gameplay only while the game is in progress, not on the loss screen
+            if (_currentState == GameStates.Game) this.Update(timer.Interval); //Update the gameplay only while the game is in progress, not on the loss screen
         }
 
         private void Game_Load(object sender, EventArgs e)
@@ -183,15 +190,17 @@ namespace shoot_em_up
             enemyList.Clear();
             obstacleList = Obstacle.GenerateObstacle(6);
 
-            //
+            //Creat new player
             player = new Player();
             // Reset the difficulty, score and the enemy spawn timer
             Config.EnemySpawnCoolDown = Config.DEFAULT_ENEMY_SPAWN_COOLDOWN;
             _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
             _difficultyLevel = 0;
             ScoreSystem.Score = 0;
-            
-            currentState = GameStates.Game;
+
+            //Reset boss
+            boss = null;
+            _currentState = GameStates.Game;
         }
     }
 }

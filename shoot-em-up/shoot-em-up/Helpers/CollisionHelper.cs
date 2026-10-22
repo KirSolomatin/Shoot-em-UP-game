@@ -33,7 +33,7 @@ namespace shoot_em_up.Helpers
                     {
                         Game.enemyList.RemoveAt(k);
                         //plus 10 points for every killed enemy
-                        ScoreSystem.Score += 10;
+                        ScoreSystem.Score += 20;
                         if (Game.bulletList[i].bulletType != Bullet.BulletType.Bishop)
                         {
                             Game.bulletList.RemoveAt(i);
