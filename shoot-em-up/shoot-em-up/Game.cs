@@ -12,6 +12,8 @@ namespace shoot_em_up
         Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
         private GameStates currentState = GameStates.Game;  //Current game state
 
+        internal static Boss? boss;
+
         //Screen size
         public static Point gameSize { get; private set; } = new Point(800, 800);
 
@@ -24,7 +26,6 @@ namespace shoot_em_up
         {
             InitializeComponent();
             this.KeyPreview = true;                             //Allows keyboard input to be detected even when the focus is on another element
-
             obstacleList = Obstacle.GenerateObstacle(6);
 
             // Gets a reference to the current BufferedGraphicsContext
@@ -83,6 +84,8 @@ namespace shoot_em_up
 
                     ScoreSystem.Render(game);
 
+                    //If the boss spawned 
+                    boss?.Render(game);
                     break;
 
                 //If the game is done
@@ -92,9 +95,7 @@ namespace shoot_em_up
                     GameOver.Render(game);
                     break;
             }
-
             game.Render();
-
         }
 
         // Calculate the new state after 'interval' milliseconds have elapsed
@@ -125,10 +126,24 @@ namespace shoot_em_up
                     currentState = GameStates.GameOver;
                 }
 
-                enemyList[i].speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
+                enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
             }
 
             player.Update(interval);
+
+            //If player have more then 700 points, spawn the boss
+            if(ScoreSystem.Score >= 7 && boss == null)
+            {
+                boss = new Boss();
+            }
+
+            //If the boss spawned 
+            boss?.Update(interval);
+
+            if(boss?.Health <= 0)
+            {
+                boss = null;
+            }
 
             //Check if bullet intersects with obstacle every tick if the case delete bullet
             CollisionHelper.CheckBulletCollision();
@@ -137,8 +152,8 @@ namespace shoot_em_up
             //Counting down the time until the next enemy
             _enemySpawnCoolDown -= interval;
 
-            //If cooldown under 0 spawn enemy
-            if (_enemySpawnCoolDown <= 0)
+            //If cooldown under 0 spawn enemy. Stop enemy spawn if player has more than 700 points
+            if (_enemySpawnCoolDown <= 0 && ScoreSystem.Score < 700)
             {
                 Enemy.SpawnEnemy();
                 //Calculate new enemy cooldown based on difficulty level

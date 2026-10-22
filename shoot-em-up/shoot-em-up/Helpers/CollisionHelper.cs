@@ -37,13 +37,24 @@ namespace shoot_em_up.Helpers
                         if (Game.bulletList[i].bulletType != Bullet.BulletType.Bishop)
                         {
                             Game.bulletList.RemoveAt(i);
+                            bulletRemoved = true;
                             break;
                         }
                     }
                 }
+
+                // Skip enemy collision checks if the bullet was removed
+                if (bulletRemoved) continue;
+
+                if (Game.boss != null && Game.bulletList[i].bulletCollision.IntersectsWith(Game.boss.bossCollision))
+                {
+                    Game.boss.Health--;
+                    Game.bulletList.RemoveAt(i);
+                }
             }
         }
 
+        //Check collision for every enemy
         public static void CheckEnemyCollision()
         {
             for (int i = Game.enemyList.Count - 1; i >= 0; i--)

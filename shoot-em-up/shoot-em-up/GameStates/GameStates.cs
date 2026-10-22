@@ -10,6 +10,7 @@ namespace shoot_em_up
     {
         //Possible game states
         Game,
-        GameOver
+        GameOver,
+        GameWon
     }
 }

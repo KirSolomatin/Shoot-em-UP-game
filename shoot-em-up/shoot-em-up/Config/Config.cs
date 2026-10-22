@@ -48,5 +48,9 @@
         #region ================ Score System ================
         public const int TIME_FOR_POINT = 500;
         #endregion
+
+        #region ================ Boss ================
+        public const int DEFAULT_BOSS_ATACK_COOLDOWN = 2000;
+        #endregion
     }
 }
