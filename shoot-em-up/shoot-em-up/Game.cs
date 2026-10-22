@@ -138,7 +138,7 @@ namespace shoot_em_up
             player.Update(interval);
 
             //If player have more then 500 points, spawn the boss
-            if(ScoreSystem.Score >= 5 && boss == null)
+            if(ScoreSystem.Score >= 500 && boss == null)
             {
                 boss = new Boss();
             }

@@ -28,8 +28,11 @@ namespace shoot_em_up
 
         public enum BulletType { Rock, Bishop, Knight };
 
-        //Bullet texture
-        private Image texture;
+        //Bullet's textures
+        private Image _texture;
+        private static readonly Image _rockTexture = Image.FromFile(@"Resources\Rock.png");
+        private static readonly Image _bishopTexture = Image.FromFile(@"Resources\bishop.png");
+        private static readonly Image _knightTexture = Image.FromFile(@"Resources\knight.png");
 
         public Bullet(Player player, BulletType type)
         {
@@ -44,21 +47,21 @@ namespace shoot_em_up
             switch (bulletType)
             {
                 case BulletType.Rock:
-                    texture = Image.FromFile(@"Resources\Rock.png");
+                    _texture = _rockTexture;
                     break;
 
                 case BulletType.Bishop:
-                    texture = Image.FromFile(@"Resources\bishop.png");
+                    _texture = _bishopTexture;
                     direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
                 case BulletType.Knight:
-                    texture = Image.FromFile(@"Resources\knight.png");
+                    _texture = _knightTexture;
                     direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
                 default:
-                    texture = Image.FromFile(@"Resources\Rock.png");
+                    _texture = _rockTexture;
                     break;
             }
         }
@@ -118,7 +121,7 @@ namespace shoot_em_up
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(texture, posX, posY, bulletSizeX, bulletSizeY);
+            drawingSpace.Graphics.DrawImage(_texture, posX, posY, bulletSizeX, bulletSizeY);
         }
     }
 }

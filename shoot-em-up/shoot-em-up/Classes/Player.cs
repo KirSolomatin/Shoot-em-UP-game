@@ -13,7 +13,7 @@ namespace shoot_em_up
         public int posX { get; private set; } //horizontal player position
         public int posY { get; private set; } //vertical player position
 
-        Image playerModel = Image.FromFile(@"Resources\King.png"); //player model
+        private static readonly Image playerModel = Image.FromFile(@"Resources\King.png"); //player model
 
         private int coolDown = 0; // Interwal between shots
 

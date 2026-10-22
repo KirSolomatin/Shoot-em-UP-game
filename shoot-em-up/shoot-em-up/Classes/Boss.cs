@@ -16,7 +16,7 @@ namespace shoot_em_up
         private Point _size;
 
         //Enemy model
-        private Image _texture = Image.FromFile(@"Resources\Boss.png");
+        private static readonly Image _texture = Image.FromFile(@"Resources\Boss.png");
 
         public float speed { get; set; } = Config.DEFAULT_ENEMY_SPEED;
 

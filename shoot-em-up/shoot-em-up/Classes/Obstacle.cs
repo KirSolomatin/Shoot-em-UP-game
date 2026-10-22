@@ -13,7 +13,7 @@ namespace shoot_em_up
         private int sizeX = 100;
         private int sizeY = 100;
 
-        private Image texture = Image.FromFile(@"Resources\Pawn.png");
+        private static readonly Image texture = Image.FromFile(@"Resources\Pawn.png");
         public Rectangle obstacleCollision;
 
         public Obstacle (int posX)
