@@ -16,7 +16,9 @@
     <None Remove="Resources\background.png" />
     <None Remove="Resources\bishop.png" />
     <None Remove="Resources\Boss.png" />
+    <None Remove="Resources\Empty_heart.png" />
     <None Remove="Resources\Enemy.png" />
+    <None Remove="Resources\Full_heart.png" />
     <None Remove="Resources\King.png" />
     <None Remove="Resources\knight.png" />
     <None Remove="Resources\Pawn.png" />
@@ -40,7 +42,13 @@
     <Content Include="Resources\Boss.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Empty_heart.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Enemy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Full_heart.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\King.png">

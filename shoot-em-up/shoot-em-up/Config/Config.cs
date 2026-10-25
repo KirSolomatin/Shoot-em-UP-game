@@ -9,6 +9,7 @@
         public const int PLAYER_START_Y_POSITION = 700;
         public const int PLAYER_X_SIZE = 100;
         public const int PLAYER_Y_SIZE = 100;
+        public const int PLAYER_MAX_HEALTH = 3;
 
         #endregion
 

@@ -125,14 +125,16 @@ namespace shoot_em_up
             for (int i = enemyList.Count - 1; i >= 0; i--)
             {
                 enemyList[i].Update(interval);
+                //Grow up enemy speed
+                enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
 
-                //Loss condition
+                //Take away a player's life
                 if (enemyList[i].Position.Y >= 700 || boss?.Position.Y >= 700)
                 {
-                    _currentState = GameStates.GameOver;
+                    enemyList.Remove(enemyList[i]);
+                    player.Health--;
                 }
 
-                enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
             }
 
             player.Update(interval);
@@ -152,6 +154,10 @@ namespace shoot_em_up
                 _currentState = GameStates.GameWon;
             }
 
+            if(player.Health <= 0)
+            {
+                _currentState = GameStates.GameOver;
+            }
             //Check if bullet intersects with obstacle every tick if the case delete bullet
             CollisionHelper.CheckBulletCollision();
 
