@@ -19,8 +19,9 @@ namespace shoot_em_up
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics game;
-        //The difficulty level increases as your score goes up
+        //The difficulty level and enemy speed increase as your score goes up
         private int _difficultyLevel = 0;
+        private int _enemySpeedlevel = 0;
 
         public Game()
         {
@@ -107,8 +108,10 @@ namespace shoot_em_up
         // Calculate the new state after 'interval' milliseconds have elapsed
         private void Update(int interval)
         {
-            //Difficulty level increasing every 30 points
-            _difficultyLevel = ScoreSystem.Score / 30;
+            //Difficulty level increasing every 20 points
+            _difficultyLevel = ScoreSystem.Score / 20;
+
+            _enemySpeedlevel = ScoreSystem.Score / 100;
 
             for (int i = bulletList.Count - 1; i >= 0; i--)
             {
@@ -126,21 +129,20 @@ namespace shoot_em_up
             {
                 enemyList[i].Update(interval);
                 //Grow up enemy speed
-                enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _difficultyLevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
+                enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _enemySpeedlevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
 
                 //Take away a player's life
-                if (enemyList[i].Position.Y >= 700 || boss?.Position.Y >= 700)
+                if (enemyList[i].Position.Y >= 700)
                 {
                     enemyList.Remove(enemyList[i]);
                     player.Health--;
                 }
-
             }
 
             player.Update(interval);
 
             //If player have more then 500 points, spawn the boss
-            if(ScoreSystem.Score >= 500 && boss == null)
+            if(ScoreSystem.Score >= 550 && boss == null)
             {
                 boss = new Boss();
             }
@@ -148,13 +150,15 @@ namespace shoot_em_up
             //If the boss spawned 
             boss?.Update(interval);
 
+            //Boss is dead if less than 1 hp
             if(boss?.Health <= 0)
             {
                 boss = null;
                 _currentState = GameStates.GameWon;
             }
 
-            if(player.Health <= 0)
+            //The game is over if player have less than 1hp or boss get the final line
+            if(player.Health <= 0 || boss?.Position.Y >= 700)
             {
                 _currentState = GameStates.GameOver;
             }
@@ -166,7 +170,7 @@ namespace shoot_em_up
             _enemySpawnCoolDown -= interval;
 
             //If cooldown under 0 spawn enemy. Stop enemy spawn if player has more than 500 points
-            if (_enemySpawnCoolDown <= 0 && ScoreSystem.Score < 500)
+            if (_enemySpawnCoolDown <= 0 && ScoreSystem.Score < 550)
             {
                 Enemy.SpawnEnemy();
                 //Calculate new enemy cooldown based on difficulty level

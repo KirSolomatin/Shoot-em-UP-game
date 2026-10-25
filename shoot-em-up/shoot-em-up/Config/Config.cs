@@ -51,7 +51,8 @@
         #endregion
 
         #region ================ Boss ================
-        public const int DEFAULT_BOSS_ATACK_COOLDOWN = 1500;
+        public const int DEFAULT_BOSS_ATACK_COOLDOWN = 1300;
+        public const float DEFAULT_BOSS_SPEED = 0.5f;
         #endregion
     }
 }

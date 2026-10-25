@@ -18,7 +18,7 @@ namespace shoot_em_up
         //Enemy model
         private static readonly Image _texture = Image.FromFile(@"Resources\Boss.png");
 
-        public float speed { get; set; } = Config.DEFAULT_ENEMY_SPEED;
+        public float speed { get; set; } = Config.DEFAULT_BOSS_SPEED;
 
         //Collision for a boss
         public Rectangle bossCollision { get; set; }
@@ -26,7 +26,7 @@ namespace shoot_em_up
         private int _verticalDescent = 0;
         private int _direction = 1; // 1 = goes right, -1 = goes left
 
-        private int _spawnCooldown = Config.DEFAULT_BOSS_ATACK_COOLDOWN;
+        private int _atackCooldown = Config.DEFAULT_BOSS_ATACK_COOLDOWN;
         //Enemy health, need to hit it 3 times to kill it.
         public int Health { get; set; } = 3;
         public Boss()
@@ -76,13 +76,13 @@ namespace shoot_em_up
         {
             Move(interval);
 
-            _spawnCooldown -= interval;
+            _atackCooldown -= interval;
 
             //Boss spawn black pawn every second
-            if (_spawnCooldown <= 0)
+            if (_atackCooldown <= 0)
             {
                 Atack();
-                _spawnCooldown = Config.DEFAULT_BOSS_ATACK_COOLDOWN; //Reset atack cooldown
+                _atackCooldown = Config.DEFAULT_BOSS_ATACK_COOLDOWN; //Reset atack cooldown
             }
 
             //Update collision every tick 
