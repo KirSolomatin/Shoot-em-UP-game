@@ -13,11 +13,11 @@ namespace shoot_em_up
         public enum Directions { Right, Left};
 
         //The direction in which a bullet will travel, for a knight and a bishop
-        public static Directions bulletDirection; 
+        public static Directions BulletDirection; 
 
         public static Directions ChooseRandomDirection()
         {
-            return (DirectionHelper.Directions)RandomHelper.random.Next(2);
+            return (DirectionHelper.Directions)RandomHelper.Random.Next(2);
         }
     }
 }

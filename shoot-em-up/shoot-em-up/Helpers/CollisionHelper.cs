@@ -16,7 +16,7 @@ namespace shoot_em_up.Helpers
                 bool bulletRemoved = false;
                 for (int j = Game.obstacleList.Count - 1; j >= 0; j--)
                 {
-                    if (Game.bulletList[i].bulletCollision.IntersectsWith(Game.obstacleList[j].obstacleCollision) && Game.bulletList[i].bulletType != Bullet.BulletType.Knight)
+                    if (Game.bulletList[i].BulletCollision.IntersectsWith(Game.obstacleList[j].ObstacleCollision) && Game.bulletList[i].BulletType != Bullet.BulletTypeList.Knight)
                     {
                         Game.bulletList.RemoveAt(i);
                         bulletRemoved = true;
@@ -29,12 +29,12 @@ namespace shoot_em_up.Helpers
 
                 for (int k = Game.enemyList.Count - 1; k >= 0; k--)
                 {
-                    if (Game.bulletList[i].bulletCollision.IntersectsWith(Game.enemyList[k].enemyCollision))
+                    if (Game.bulletList[i].BulletCollision.IntersectsWith(Game.enemyList[k].EnemyCollision))
                     {
                         Game.enemyList.RemoveAt(k);
                         //plus 10 points for every killed enemy
                         ScoreSystem.Score += 20;
-                        if (Game.bulletList[i].bulletType != Bullet.BulletType.Bishop)
+                        if (Game.bulletList[i].BulletType != Bullet.BulletTypeList.Bishop)
                         {
                             Game.bulletList.RemoveAt(i);
                             bulletRemoved = true;
@@ -46,7 +46,7 @@ namespace shoot_em_up.Helpers
                 // Skip enemy collision checks if the bullet was removed
                 if (bulletRemoved) continue;
 
-                if (Game.boss != null && Game.bulletList[i].bulletCollision.IntersectsWith(Game.boss.bossCollision))
+                if (Game.boss != null && Game.bulletList[i].BulletCollision.IntersectsWith(Game.boss.BossCollision))
                 {
                     Game.boss.Health--;
                     Game.bulletList.RemoveAt(i);
@@ -61,7 +61,7 @@ namespace shoot_em_up.Helpers
             {
                 for (int j = Game.obstacleList.Count - 1; j >= 0; j--)
                 {
-                    if (Game.enemyList[i].enemyCollision.IntersectsWith(Game.obstacleList[j].obstacleCollision))
+                    if (Game.enemyList[i].EnemyCollision.IntersectsWith(Game.obstacleList[j].ObstacleCollision))
                     {
                         Game.enemyList.RemoveAt(i);
                         Game.obstacleList.RemoveAt(j);

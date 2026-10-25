@@ -10,41 +10,40 @@ namespace shoot_em_up
     internal static class ScoreSystem
     {
         public static int Score { get; set; } = 0; // Stores the current score
-        private static Point position = new Point(0, 0); // Stores the position where the score will be drawn
+        private static Point _position = new Point(0, 0); // Stores the position where the score will be drawn
 
         // Stores the collection of custom fonts
-        private static PrivateFontCollection fonts = new PrivateFontCollection();
-        private static Font font; 
-        private static Brush brush = Brushes.Black; // Defines the color of the text
+        private static PrivateFontCollection _fonts = new PrivateFontCollection();
+        private static Font _font; 
+        private static Brush _brush = Brushes.Black; // Defines the color of the text
 
-        private static int scoreCoolDown = Config.TIME_FOR_POINT;
+        private static int _scoreCoolDown = Config.TIME_FOR_POINT;
 
-        
         static ScoreSystem ()
         {
             // Loads the font from a file
-            fonts.AddFontFile(@"fonts\PressStart2P-Regular.ttf");
+            _fonts.AddFontFile(@"fonts\PressStart2P-Regular.ttf");
 
             // Defines the font and its size
-            font = new Font(fonts.Families[0], 16f, FontStyle.Regular);
+            _font = new Font(_fonts.Families[0], 16f, FontStyle.Regular);
         }
 
         //Increases points over time
         public static void Update(int interval)
         {
-            scoreCoolDown -= interval;
+            _scoreCoolDown -= interval;
 
-            if(scoreCoolDown <= 0)
+            if(_scoreCoolDown <= 0)
             {
                 Score++;
-                scoreCoolDown = Config.TIME_FOR_POINT;
+                _scoreCoolDown = Config.TIME_FOR_POINT;
             }
         }
 
         // Draws the score string at the specified 
         public static void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawString($"Score:{Score}", font, brush, position.X, position.Y);
+            drawingSpace.Graphics.DrawString($"Score:{Score}", _font, _brush, _position.X, _position.Y);
         }
     }
 }

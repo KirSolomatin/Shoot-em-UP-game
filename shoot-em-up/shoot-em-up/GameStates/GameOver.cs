@@ -10,32 +10,32 @@ namespace shoot_em_up
     internal static class GameOver
     {
         // Stores the position where the phrases will be drawn
-        private static Point positionCheckmate = new Point(Game.gameSize.X / 2, Game.gameSize.Y / 2 - 100);
-        private static Point positionYourScore = new Point(Game.gameSize.X / 2, Game.gameSize.Y / 2);
-        private static Point positionRestart = new Point(Game.gameSize.X / 2, Game.gameSize.Y / 2 + 200);
+        private static Point _positionCheckmate = new Point(Game.gameSize.X / 2, Game.gameSize.Y / 2 - 100);
+        private static Point _positionYourScore = new Point(Game.gameSize.X / 2, Game.gameSize.Y / 2);
+        private static Point _positionRestart = new Point(Game.gameSize.X / 2, Game.gameSize.Y / 2 + 200);
 
         // Stores the collection of custom fonts
-        private static PrivateFontCollection fonts = new PrivateFontCollection();
-        private static Font font;
-        private static Brush brush = Brushes.Black; // Defines the color of the text
+        private static PrivateFontCollection _fonts = new PrivateFontCollection();
+        private static Font _font;
+        private static Brush _brush = Brushes.Black; // Defines the color of the text
         //Centers the text
-        private static StringFormat center = new StringFormat { Alignment = StringAlignment.Center };
+        private static StringFormat _center = new StringFormat { Alignment = StringAlignment.Center };
 
         static GameOver()
         {
             // Loads the font from a file
-            fonts.AddFontFile(@"fonts\PressStart2P-Regular.ttf");
+            _fonts.AddFontFile(@"fonts\PressStart2P-Regular.ttf");
 
             // Defines the font and its size
-            font = new Font(fonts.Families[0], 24f, FontStyle.Regular);
+            _font = new Font(_fonts.Families[0], 24f, FontStyle.Regular);
         }
 
         // Draws the phrases
         public static void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawString($"Checkmate", font, brush, positionCheckmate.X, positionCheckmate.Y, center);
-            drawingSpace.Graphics.DrawString($"Your score: {ScoreSystem.Score}", font, brush, positionYourScore.X, positionYourScore.Y, center);
-            drawingSpace.Graphics.DrawString($"Press R to restart", font, brush, positionRestart.X, positionRestart.Y, center);
+            drawingSpace.Graphics.DrawString($"Checkmate", _font, _brush, _positionCheckmate.X, _positionCheckmate.Y, _center);
+            drawingSpace.Graphics.DrawString($"Your score: {ScoreSystem.Score}", _font, _brush, _positionYourScore.X, _positionYourScore.Y, _center);
+            drawingSpace.Graphics.DrawString($"Press R to restart", _font, _brush, _positionRestart.X, _positionRestart.Y, _center);
         }
     }
 }

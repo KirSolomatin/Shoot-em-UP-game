@@ -43,9 +43,9 @@ namespace shoot_em_up
             {
                 if (e.KeyCode == Keys.D) player.RightMove();
                 if (e.KeyCode == Keys.A) player.LeftMove();
-                if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletType.Rock);
-                if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletType.Bishop);
-                if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletType.Knight);
+                if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletTypeList.Rock);
+                if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletTypeList.Bishop);
+                if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletTypeList.Knight);
             }
 
             if ((_currentState == GameStates.GameOver || _currentState == GameStates.GameWon) && e.KeyCode == Keys.R) RestartGame();
@@ -118,10 +118,10 @@ namespace shoot_em_up
                 bulletList[i].Update(interval);
 
                 //If bullet is out of game space
-                if (bulletList[i].isDestroyed || 
-                    bulletList[i].posY < -10 || 
-                    bulletList[i].posX < -50 || 
-                    bulletList[i].posX > 810) 
+                if (bulletList[i].IsDestroyed || 
+                    bulletList[i].PosY < -10 || 
+                    bulletList[i].PosX < -50 || 
+                    bulletList[i].PosX > 810) 
                     bulletList.Remove(bulletList[i]);
             }
 

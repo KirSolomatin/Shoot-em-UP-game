@@ -8,20 +8,20 @@ namespace shoot_em_up
 {
     internal class Obstacle
     {
-        public int posX { get; private set; }              //Horizontal obstacle position
-        private int posY = 600;              //Vertical obstacle position
-        private int sizeX = 100;
-        private int sizeY = 100;
+        public int PosX { get; private set; }              //Horizontal obstacle position
+        private int _posY = 600;              //Vertical obstacle position
+        private int _sizeX = 100;
+        private int _sizeY = 100;
 
-        private static readonly Image texture = Image.FromFile(@"Resources\Pawn.png");
-        public Rectangle obstacleCollision;
+        private static readonly Image _texture = Image.FromFile(@"Resources\Pawn.png");
+        public Rectangle ObstacleCollision;
 
         public Obstacle (int posX)
         {
-            this.posX = posX;
+            this.PosX = posX;
 
             //Initialization collision for an obstacle
-            obstacleCollision = new Rectangle(posX, posY, sizeX / 2, sizeY / 10);
+            ObstacleCollision = new Rectangle(posX, _posY, _sizeX / 2, _sizeY / 10);
         }
 
         //Methode who can generate any obstacle's number 
@@ -47,7 +47,7 @@ namespace shoot_em_up
         }
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(texture, posX, posY, sizeX, sizeY);
+            drawingSpace.Graphics.DrawImage(_texture, PosX, _posY, _sizeX, _sizeY);
         }
 
     }

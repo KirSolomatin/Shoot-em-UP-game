@@ -23,7 +23,7 @@
         //Possible spawn points for enemy
         //There are 8 spawn points corresponding to each square on a chessboard
         //y position = -100, enemy spawns outside the window
-        public static Point[] enemySpawnPoints =
+        public static Point[] EnemySpawnPoints =
         {
             new Point(0, -100),
             new Point(100, -100),

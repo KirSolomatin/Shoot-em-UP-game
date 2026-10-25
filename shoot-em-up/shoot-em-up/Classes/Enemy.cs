@@ -20,7 +20,7 @@ namespace shoot_em_up
         public float Speed { get; set; } = Config.DEFAULT_ENEMY_SPEED;
 
         //Collision for an enemy 
-        public Rectangle enemyCollision;
+        public Rectangle EnemyCollision;
 
         public Enemy(Point position)
         {
@@ -30,7 +30,7 @@ namespace shoot_em_up
             _size.X = 100;
             _size.Y = 100;
 
-            enemyCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
+            EnemyCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
         }
 
         //Enemy movement
@@ -44,7 +44,7 @@ namespace shoot_em_up
             Move(interval);
 
             //Update collision every tick 
-            enemyCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
+            EnemyCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
         }
 
         public void Render(BufferedGraphics drawingSpace)
@@ -54,7 +54,7 @@ namespace shoot_em_up
 
         public static void SpawnEnemy()
         {
-            Game.enemyList.Add(new Enemy(Config.enemySpawnPoints[RandomHelper.Next(Config.enemySpawnPoints.Length)]));
+            Game.enemyList.Add(new Enemy(Config.EnemySpawnPoints[RandomHelper.Next(Config.EnemySpawnPoints.Length)]));
         }
     }
 }

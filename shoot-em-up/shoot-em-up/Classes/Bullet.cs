@@ -9,24 +9,24 @@ namespace shoot_em_up
 {
     internal class Bullet
     {
-        public int posX { get; private set; }              //Horizontal bullet position
-        public int posY { get; private set; }              //Vertical bullet position
+        public int PosX { get; private set; }              //Horizontal bullet position
+        public int PosY { get; private set; }              //Vertical bullet position
 
         //Note where the bullet came from
-        public int startY { get; private set; }
-        public int startX { get; private set; }
-        public bool isDestroyed { get; set; }// true when the bullet has travelled its path
+        public int StartY { get; private set; }
+        public int StartX { get; private set; }
+        public bool IsDestroyed { get; set; }// true when the bullet has travelled its path
 
-        private float bulletSpeed = 1.3f;                        //Bullet speed
-        private int bulletSizeX = 100;
-        private int bulletSizeY = 100;
+        private float _bulletSpeed = 1.3f;                        //Bullet speed
+        private int _bulletSizeX = 100;
+        private int _bulletSizeY = 100;
         //Collision for an bullet 
-        public Rectangle bulletCollision;
+        public Rectangle BulletCollision { get; set; }
 
-        public BulletType bulletType { get; private set; }
-        private DirectionHelper.Directions direction;       //The direction in which a bullet will travel if knight or bishop
+        public BulletTypeList BulletType { get; private set; }
+        private DirectionHelper.Directions _direction;       //The direction in which a bullet will travel if knight or bishop
 
-        public enum BulletType { Rock, Bishop, Knight };
+        public enum BulletTypeList { Rock, Bishop, Knight };
 
         //Bullet's textures
         private Image _texture;
@@ -34,30 +34,30 @@ namespace shoot_em_up
         private static readonly Image _bishopTexture = Image.FromFile(@"Resources\bishop.png");
         private static readonly Image _knightTexture = Image.FromFile(@"Resources\knight.png");
 
-        public Bullet(Player player, BulletType type)
+        public Bullet(Player player, BulletTypeList type)
         {
-            posX = player.posX;
-            posY = player.posY;
+            PosX = player.PosX;
+            PosY = player.PosY;
 
-            startY = posY;
-            startX = posX;
+            StartY = PosY;
+            StartX = PosX;
 
-            bulletType = type;
+            BulletType = type;
 
-            switch (bulletType)
+            switch (BulletType)
             {
-                case BulletType.Rock:
+                case BulletTypeList.Rock:
                     _texture = _rockTexture;
                     break;
 
-                case BulletType.Bishop:
+                case BulletTypeList.Bishop:
                     _texture = _bishopTexture;
-                    direction = DirectionHelper.ChooseRandomDirection();
+                    _direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
-                case BulletType.Knight:
+                case BulletTypeList.Knight:
                     _texture = _knightTexture;
-                    direction = DirectionHelper.ChooseRandomDirection();
+                    _direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
                 default:
@@ -67,47 +67,47 @@ namespace shoot_em_up
         }
 
         //Bullet vertical movement
-        private void Move(int interval, BulletType type)
+        private void Move(int interval, BulletTypeList type)
         {
             switch (type)
             {
                 //Rock movement
-                case BulletType.Rock:
-                    posY -= (int)(bulletSpeed * interval);
+                case BulletTypeList.Rock:
+                    PosY -= (int)(_bulletSpeed * interval);
 
                     //Update collision every tick 
-                    bulletCollision = new Rectangle(posX, posY, bulletSizeX / 2, bulletSizeY / 2);
+                    BulletCollision = new Rectangle(PosX, PosY, _bulletSizeX / 2, _bulletSizeY / 2);
                     break;
 
                 //Bishop movement
-                case BulletType.Bishop:
-                    if (direction == DirectionHelper.Directions.Left) posX -= (int)(bulletSpeed * interval);
-                    else posX += (int)(bulletSpeed * interval);
-                    posY -= (int)(bulletSpeed * interval);
+                case BulletTypeList.Bishop:
+                    if (_direction == DirectionHelper.Directions.Left) PosX -= (int)(_bulletSpeed * interval);
+                    else PosX += (int)(_bulletSpeed * interval);
+                    PosY -= (int)(_bulletSpeed * interval);
 
                     //Update collision every tick 
-                    bulletCollision = new Rectangle(posX, posY, bulletSizeX / 2, bulletSizeY / 4);
+                    BulletCollision = new Rectangle(PosX, PosY, _bulletSizeX / 2, _bulletSizeY / 4);
                     break;
 
                 //Knight movement
-                case BulletType.Knight:
-                    if (startY - posY < 200)          //Hasn't scrolled 200 px upwards yet
+                case BulletTypeList.Knight:
+                    if (StartY - PosY < 200)          //Hasn't scrolled 200 px upwards yet
                     {
-                        posY -= (int)(bulletSpeed * interval);
+                        PosY -= (int)(_bulletSpeed * interval);
                     }
-                    else if (Math.Abs(startX - posX) < 100)
+                    else if (Math.Abs(StartX - PosX) < 100)
                     {
-                        if (direction == DirectionHelper.Directions.Left)
-                            posX -= (int)(bulletSpeed * interval);
-                        else if (direction == DirectionHelper.Directions.Right)
-                            posX += (int)(bulletSpeed * interval);
+                        if (_direction == DirectionHelper.Directions.Left)
+                            PosX -= (int)(_bulletSpeed * interval);
+                        else if (_direction == DirectionHelper.Directions.Right)
+                            PosX += (int)(_bulletSpeed * interval);
                     }
                     else
                     {
-                        isDestroyed = true;
+                        IsDestroyed = true;
                     }
 
-                    bulletCollision = new Rectangle(posX, posY, bulletSizeX, bulletSizeY);
+                    BulletCollision = new Rectangle(PosX, PosY, _bulletSizeX, _bulletSizeY);
                     break;
             }
         }
@@ -116,12 +116,12 @@ namespace shoot_em_up
         // 'interval' milliseconds have elapsed
         public void Update(int interval)
         {
-            Move(interval, this.bulletType);
+            Move(interval, this.BulletType);
         }
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(_texture, posX, posY, bulletSizeX, bulletSizeY);
+            drawingSpace.Graphics.DrawImage(_texture, PosX, PosY, _bulletSizeX, _bulletSizeY);
         }
     }
 }
