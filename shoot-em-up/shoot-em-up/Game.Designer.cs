@@ -41,12 +41,14 @@
             // 
             // Game
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleMode = AutoScaleMode.None;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(884, 861);
+            ClientSize = new Size(800, 800);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
             Name = "Game";
-            Text = "Form1";
+            Text = "Shoot chess";
             Load += Game_Load;
             KeyDown += Game_KeyDown;
             ResumeLayout(false);

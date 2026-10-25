@@ -15,17 +15,17 @@ namespace shoot_em_up
         private Point _size;
 
         //Enemy model
-        private Image _texture = Image.FromFile(@"Resources\Enemy.png");
+        private static readonly Image _texture = Image.FromFile(@"Resources\Enemy.png");
 
-        public float speed = 0.3f;
+        public float Speed { get; set; } = Config.DEFAULT_ENEMY_SPEED;
 
         //Collision for an enemy 
         public Rectangle enemyCollision;
 
-        public Enemy()
+        public Enemy(Point position)
         {
             //Set the start position
-            Position = Config.enemySpawnPoints[RandomHelper.Next(Config.enemySpawnPoints.Length)];
+            Position = position;
 
             _size.X = 100;
             _size.Y = 100;
@@ -36,7 +36,7 @@ namespace shoot_em_up
         //Enemy movement
         private void Move(int interval)
         {
-            Position = new Point(Position.X, Position.Y + (int)(speed * interval));
+            Position = new Point(Position.X, Position.Y + (int)(Speed * interval));
         }
 
         public void Update(int interval)
@@ -54,7 +54,7 @@ namespace shoot_em_up
 
         public static void SpawnEnemy()
         {
-            Game.enemyList.Add(new Enemy());
+            Game.enemyList.Add(new Enemy(Config.enemySpawnPoints[RandomHelper.Next(Config.enemySpawnPoints.Length)]));
         }
     }
 }

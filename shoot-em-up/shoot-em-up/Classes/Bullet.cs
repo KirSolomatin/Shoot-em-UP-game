@@ -18,8 +18,8 @@ namespace shoot_em_up
         public bool isDestroyed { get; set; }// true when the bullet has travelled its path
 
         private float bulletSpeed = 1.3f;                        //Bullet speed
-        private int bulletSizeX = 50;
-        private int bulletSizeY = 50;
+        private int bulletSizeX = 100;
+        private int bulletSizeY = 100;
         //Collision for an bullet 
         public Rectangle bulletCollision;
 
@@ -28,8 +28,11 @@ namespace shoot_em_up
 
         public enum BulletType { Rock, Bishop, Knight };
 
-        //Bullet texture
-        private Image texture;
+        //Bullet's textures
+        private Image _texture;
+        private static readonly Image _rockTexture = Image.FromFile(@"Resources\Rock.png");
+        private static readonly Image _bishopTexture = Image.FromFile(@"Resources\bishop.png");
+        private static readonly Image _knightTexture = Image.FromFile(@"Resources\knight.png");
 
         public Bullet(Player player, BulletType type)
         {
@@ -44,25 +47,23 @@ namespace shoot_em_up
             switch (bulletType)
             {
                 case BulletType.Rock:
-                    texture = Image.FromFile(@"Resources\Rock.png");
+                    _texture = _rockTexture;
                     break;
 
                 case BulletType.Bishop:
-                    texture = Image.FromFile(@"Resources\bishop.png");
+                    _texture = _bishopTexture;
                     direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
                 case BulletType.Knight:
-                    texture = Image.FromFile(@"Resources\knight.png");
+                    _texture = _knightTexture;
                     direction = DirectionHelper.ChooseRandomDirection();
                     break;
 
                 default:
-                    texture = Image.FromFile(@"Resources\Rock.png");
+                    _texture = _rockTexture;
                     break;
             }
-
-            bulletCollision = new Rectangle(posX + bulletSizeX / 2, posY - bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
 
         //Bullet vertical movement
@@ -73,6 +74,9 @@ namespace shoot_em_up
                 //Rock movement
                 case BulletType.Rock:
                     posY -= (int)(bulletSpeed * interval);
+
+                    //Update collision every tick 
+                    bulletCollision = new Rectangle(posX, posY, bulletSizeX / 2, bulletSizeY / 2);
                     break;
 
                 //Bishop movement
@@ -80,6 +84,9 @@ namespace shoot_em_up
                     if (direction == DirectionHelper.Directions.Left) posX -= (int)(bulletSpeed * interval);
                     else posX += (int)(bulletSpeed * interval);
                     posY -= (int)(bulletSpeed * interval);
+
+                    //Update collision every tick 
+                    bulletCollision = new Rectangle(posX, posY, bulletSizeX / 2, bulletSizeY / 4);
                     break;
 
                 //Knight movement
@@ -99,11 +106,10 @@ namespace shoot_em_up
                     {
                         isDestroyed = true;
                     }
+
+                    bulletCollision = new Rectangle(posX, posY, bulletSizeX, bulletSizeY);
                     break;
             }
-
-            //Update collision every tick 
-            bulletCollision = new Rectangle(posX + bulletSizeX / 2, posY - bulletSizeY / 2, bulletSizeX, bulletSizeY);
         }
 
         // This method calculates the bullet's new state after
@@ -115,7 +121,7 @@ namespace shoot_em_up
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(texture, posX + bulletSizeX / 2, posY + bulletSizeY / 2, bulletSizeX, bulletSizeY);
+            drawingSpace.Graphics.DrawImage(_texture, posX, posY, bulletSizeX, bulletSizeY);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace shoot_em_up
 {
     internal static class ScoreSystem
     {
-        public static int score = 0; // Stores the current score
+        public static int Score { get; set; } = 0; // Stores the current score
         private static Point position = new Point(0, 0); // Stores the position where the score will be drawn
 
         // Stores the collection of custom fonts
@@ -36,7 +36,7 @@ namespace shoot_em_up
 
             if(scoreCoolDown <= 0)
             {
-                score++;
+                Score++;
                 scoreCoolDown = Config.TIME_FOR_POINT;
             }
         }
@@ -44,7 +44,7 @@ namespace shoot_em_up
         // Draws the score string at the specified 
         public static void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawString($"Score:{score}", font, brush, position.X, position.Y);
+            drawingSpace.Graphics.DrawString($"Score:{Score}", font, brush, position.X, position.Y);
         }
     }
 }
