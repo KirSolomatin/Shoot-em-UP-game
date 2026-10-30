@@ -9,6 +9,8 @@ namespace shoot_em_up
     internal enum GameStates
     {
         //Possible game states
+        MainMenu,
+        Controls,
         Game,
         GameOver,
         GameWon

@@ -10,7 +10,7 @@ namespace shoot_em_up
         internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
         private int _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
         Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
-        private GameStates _currentState = GameStates.Game;  //Current game state
+        private GameStates _currentState = GameStates.MainMenu;  //Current game state
 
         internal static Boss? boss;
 
@@ -58,6 +58,12 @@ namespace shoot_em_up
 
             switch(_currentState)
             {
+                //If player is in main menu
+                case GameStates.MainMenu:
+                    //Draw the background
+                    game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
+                    MainMenu.Render(game);
+                    break;
                 //If the game in progress 
                 case GameStates.Game:
 

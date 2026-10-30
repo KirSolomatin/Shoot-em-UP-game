@@ -48,7 +48,7 @@
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "Game";
-            Text = "Shoot chess";
+            Text = "Chessageddon";
             Load += Game_Load;
             KeyDown += Game_KeyDown;
             ResumeLayout(false);
