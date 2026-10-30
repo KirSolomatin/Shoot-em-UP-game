@@ -46,8 +46,12 @@ namespace shoot_em_up
             //If the boss hasn't moved down 100 pixels yet
             if (_verticalDescent < 100)
             {
-                Position = new Point(Position.X, Position.Y + (int)(Speed * interval));
-                _verticalDescent += (int)(Speed * interval);
+                // How many pixels are left until the 100-pixel limit
+                int remaining = 100 - _verticalDescent;
+                // Step size for this frame, but never more than the remaining distance
+                int move = Math.Min((int)(Speed * interval), remaining);
+                Position = new Point(Position.X, Position.Y + move);
+                _verticalDescent += move;
             }
 
             else
