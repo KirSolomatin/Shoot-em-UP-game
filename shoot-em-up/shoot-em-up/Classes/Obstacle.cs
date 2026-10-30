@@ -1,4 +1,5 @@
-﻿using System;
+﻿using shoot_em_up.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace shoot_em_up
 {
-    internal class Obstacle
+    public class Obstacle
     {
         public int PosX { get; private set; }              //Horizontal obstacle position
         private int _posY = 600;              //Vertical obstacle position
@@ -29,19 +30,18 @@ namespace shoot_em_up
         {
             List<Obstacle> obstaclesList = new List<Obstacle>();
             List<int> usedIndex = new List<int>();              //List of used position, so that pawns don't land on top of each other
-            Random random = new Random();                       //For generate a random position
 
             for (int i = 0; i < numbreObstacle; i++)
             {
-                int positionIndex = random.Next(0, 8);
+                int positionIndex = RandomHelper.Next(0,8); //Take a random position
 
-                if (!usedIndex.Contains(positionIndex))
+                if (!usedIndex.Contains(positionIndex))//If position is free 
                 {
-                    usedIndex.Add(positionIndex);
-                    Obstacle obstacle = new Obstacle(100 * positionIndex);
-                    obstaclesList.Add(obstacle);
+                    usedIndex.Add(positionIndex);//Add position to the list of used 
+                    Obstacle obstacle = new Obstacle(100 * positionIndex);//Give position to an obstacle
+                    obstaclesList.Add(obstacle);//Add obstacle to the list of obstacles
                 }
-                else i--;
+                else i--;//If position wasn't free, cancel the stage
             }
             return obstaclesList;
         }

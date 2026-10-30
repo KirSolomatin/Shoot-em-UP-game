@@ -27,11 +27,11 @@ namespace shoot_em_up.Helpers
                 // Skip enemy collision checks if the bullet was removed
                 if (bulletRemoved) continue;
 
-                for (int k = Game.enemyList.Count - 1; k >= 0; k--)
+                for (int k = Game.EnemyList.Count - 1; k >= 0; k--)
                 {
-                    if (Game.bulletList[i].BulletCollision.IntersectsWith(Game.enemyList[k].EnemyCollision))
+                    if (Game.bulletList[i].BulletCollision.IntersectsWith(Game.EnemyList[k].EnemyCollision))
                     {
-                        Game.enemyList.RemoveAt(k);
+                        Game.EnemyList.RemoveAt(k);
                         //plus 10 points for every killed enemy
                         ScoreSystem.Score += 20;
                         if (Game.bulletList[i].BulletType != Bullet.BulletTypeList.Bishop)
@@ -57,13 +57,13 @@ namespace shoot_em_up.Helpers
         //Check collision for every enemy
         public static void CheckEnemyCollision()
         {
-            for (int i = Game.enemyList.Count - 1; i >= 0; i--)
+            for (int i = Game.EnemyList.Count - 1; i >= 0; i--)
             {
                 for (int j = Game.obstacleList.Count - 1; j >= 0; j--)
                 {
-                    if (Game.enemyList[i].EnemyCollision.IntersectsWith(Game.obstacleList[j].ObstacleCollision))
+                    if (Game.EnemyList[i].EnemyCollision.IntersectsWith(Game.obstacleList[j].ObstacleCollision))
                     {
-                        Game.enemyList.RemoveAt(i);
+                        Game.EnemyList.RemoveAt(i);
                         Game.obstacleList.RemoveAt(j);
                         break;
                     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace shoot_em_up
 {
-    internal class Player
+    public class Player
     {
         public int PosX { get; private set; } //horizontal player position
         public int PosY { get; private set; } //vertical player position
@@ -33,19 +33,19 @@ namespace shoot_em_up
         }
 
         //Movement to the right
-        public void LeftMove()
+        public void MoveLeft()
         {
             if(PosX > 0) PosX -= 100;
         }
 
         //Movement to the left
-        public void RightMove()
+        public void MoveRight()
         {
             if(PosX < 700) PosX += 100;
         }
 
         //Spawn bullets
-        public void BulletSpawn(List<Bullet> bullets, Bullet.BulletTypeList bulletType)
+        public void Shoot(List<Bullet> bullets, Bullet.BulletTypeList bulletType)
         {
             if (_coolDown < 0)
             {

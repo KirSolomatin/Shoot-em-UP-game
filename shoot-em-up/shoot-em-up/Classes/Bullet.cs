@@ -7,7 +7,7 @@ using static System.Windows.Forms.AxHost;
 
 namespace shoot_em_up
 {
-    internal class Bullet
+    public class Bullet
     {
         public int PosX { get; private set; }              //Horizontal bullet position
         public int PosY { get; private set; }              //Vertical bullet position

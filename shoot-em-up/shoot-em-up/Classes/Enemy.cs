@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace shoot_em_up
 {
-    internal class Enemy
+    public class Enemy
     {
         //Enemy position
         public Point Position { get; private set; }
@@ -54,7 +54,7 @@ namespace shoot_em_up
 
         public static void SpawnEnemy()
         {
-            Game.enemyList.Add(new Enemy(Config.EnemySpawnPoints[RandomHelper.Next(Config.EnemySpawnPoints.Length)]));
+            Game.EnemyList.Add(new Enemy(Config.EnemySpawnPoints[RandomHelper.Next(Config.EnemySpawnPoints.Length)]));
         }
     }
 }

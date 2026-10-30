@@ -7,7 +7,7 @@ namespace shoot_em_up
         private Player player = new Player(); //Player
         internal static List<Bullet> bulletList = new List<Bullet>(); //List of bullets
         internal static List<Obstacle> obstacleList= new List<Obstacle>(); // List of obstacles
-        internal static List<Enemy> enemyList = new List<Enemy>(); //List of enemys
+        public static List<Enemy> EnemyList = new List<Enemy>(); //List of enemys
         private int _enemySpawnCoolDown = Config.EnemySpawnCoolDown;
         Image backGround = Image.FromFile(@"Resources\background.png"); //Background texture
         private GameStates _currentState = GameStates.MainMenu;  //Current game state
@@ -52,11 +52,11 @@ namespace shoot_em_up
 
             if (_currentState == GameStates.Game)
             {
-                if (e.KeyCode == Keys.D) player.RightMove();
-                if (e.KeyCode == Keys.A) player.LeftMove();
-                if (e.KeyCode == Keys.J) player.BulletSpawn(bulletList, Bullet.BulletTypeList.Rock);
-                if (e.KeyCode == Keys.K) player.BulletSpawn(bulletList, Bullet.BulletTypeList.Bishop);
-                if (e.KeyCode == Keys.L) player.BulletSpawn(bulletList, Bullet.BulletTypeList.Knight);
+                if (e.KeyCode == Keys.D) player.MoveRight();
+                if (e.KeyCode == Keys.A) player.MoveLeft();
+                if (e.KeyCode == Keys.J) player.Shoot(bulletList, Bullet.BulletTypeList.Rock);
+                if (e.KeyCode == Keys.K) player.Shoot(bulletList, Bullet.BulletTypeList.Bishop);
+                if (e.KeyCode == Keys.L) player.Shoot(bulletList, Bullet.BulletTypeList.Knight);
             }
 
             if ((_currentState == GameStates.GameOver || _currentState == GameStates.GameWon) && e.KeyCode == Keys.R) RestartGame();
@@ -103,7 +103,7 @@ namespace shoot_em_up
                         obstacle.Render(game);
                     }
 
-                    foreach (Enemy enemy in enemyList)
+                    foreach (Enemy enemy in EnemyList)
                     {
                         enemy.Render(game);
                     }
@@ -150,16 +150,16 @@ namespace shoot_em_up
                     bulletList.Remove(bulletList[i]);
             }
 
-            for (int i = enemyList.Count - 1; i >= 0; i--)
+            for (int i = EnemyList.Count - 1; i >= 0; i--)
             {
-                enemyList[i].Update(interval);
+                EnemyList[i].Update(interval);
                 //Grow up enemy speed
-                enemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _enemySpeedlevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
+                EnemyList[i].Speed = Math.Min(Config.DEFAULT_ENEMY_SPEED + _enemySpeedlevel * 0.1f, Config.MAXIMUM_ENEMY_SPEED);
 
                 //Take away a player's life
-                if (enemyList[i].Position.Y >= 700)
+                if (EnemyList[i].Position.Y >= 700)
                 {
-                    enemyList.Remove(enemyList[i]);
+                    EnemyList.Remove(EnemyList[i]);
                     player.Health--;
                 }
             }
@@ -222,7 +222,7 @@ namespace shoot_em_up
         {
             // Clear away everything left over from the previous batch
             bulletList.Clear();
-            enemyList.Clear();
+            EnemyList.Clear();
             obstacleList = Obstacle.GenerateObstacle(6);
 
             //Creat new player

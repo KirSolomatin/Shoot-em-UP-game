@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace shoot_em_up
 {
-    internal class Boss
+    public class Boss
     {
         //Boss position
         public Point Position { get; private set; }
@@ -40,7 +40,7 @@ namespace shoot_em_up
             BossCollision = new Rectangle(Position.X, Position.Y, _size.X, _size.Y);
         }
 
-        //Enemy movement
+        //Boss movement
         private void Move(int interval)
         {
             //If the boss hasn't moved down 100 pixels yet
@@ -71,9 +71,9 @@ namespace shoot_em_up
             }
         }
 
-        public void Atack()
+        public void Shoot()
         {
-            Game.enemyList.Add(new Enemy(Position));
+            Game.EnemyList.Add(new Enemy(Position));
         }
 
         public void Update(int interval)
@@ -85,7 +85,7 @@ namespace shoot_em_up
             //Boss spawn black pawn every second
             if (_atackCooldown <= 0)
             {
-                Atack();
+                Shoot();
                 _atackCooldown = Config.DEFAULT_BOSS_ATACK_COOLDOWN; //Reset atack cooldown
             }
 
