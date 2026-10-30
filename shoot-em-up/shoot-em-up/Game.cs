@@ -39,6 +39,17 @@ namespace shoot_em_up
 
         private void Game_KeyDown(object sender, KeyEventArgs e)
         {
+            if (_currentState == GameStates.MainMenu)
+            {
+                if (e.KeyCode == Keys.Space) _currentState = GameStates.Game;
+                if (e.KeyCode == Keys.H) _currentState = GameStates.Instructions;
+            }
+
+            if (_currentState == GameStates.Instructions)
+            {
+                if (e.KeyCode == Keys.Escape) _currentState = GameStates.MainMenu;
+            }
+
             if (_currentState == GameStates.Game)
             {
                 if (e.KeyCode == Keys.D) player.RightMove();
@@ -64,6 +75,14 @@ namespace shoot_em_up
                     game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
                     MainMenu.Render(game);
                     break;
+
+                //If player is checking how to play
+                case GameStates.Instructions:
+                    //Draw the background
+                    game.Graphics.DrawImage(backGround, 0, 0, gameSize.X, gameSize.Y);
+                    Instructions.Render(game);
+                    break;
+
                 //If the game in progress 
                 case GameStates.Game:
 

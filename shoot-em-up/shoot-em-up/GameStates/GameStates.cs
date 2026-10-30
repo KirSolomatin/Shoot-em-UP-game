@@ -10,7 +10,7 @@ namespace shoot_em_up
     {
         //Possible game states
         MainMenu,
-        Controls,
+        Instructions,
         Game,
         GameOver,
         GameWon
