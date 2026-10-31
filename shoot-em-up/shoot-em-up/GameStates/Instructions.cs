@@ -33,7 +33,7 @@ namespace shoot_em_up
 
             // Defines the font and its size
             _fontTitle = new Font(_fonts.Families[0], 24f, FontStyle.Regular);
-            _fontText = new Font(_fonts.Families[0], 18f, FontStyle.Regular);
+            _fontText = new Font(_fonts.Families[0], 17f, FontStyle.Regular);
         }
 
         // Draws the phrases
